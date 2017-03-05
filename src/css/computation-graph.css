@@ -1,0 +1,27 @@
+.computation-graph {
+  flex: 1;
+}
+
+.computation-graph-nodes {}
+
+.computation-graph-node {
+  display: inline-block;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: .4em .6em;
+  border: 1px solid #ccc;
+  border-radius: .2em;
+  background: linear-gradient(white, #f7f7f7);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  margin: 2px;
+  transition: color 200ms ease,
+              border-color 200ms linear,
+              box-shadow 200ms linear;
+}
+
+.computation-graph-node:hover {
+  box-shadow: 0 2px 2px rgba(0,0,0,.08);
+  border-color: #bbb;
+  color: #309ee4;
+  cursor: pointer;
+}

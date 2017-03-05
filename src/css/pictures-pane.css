@@ -1,0 +1,5 @@
+.pictures-pane {
+  flex: 0 0 120px;
+  background: linear-gradient(#ddd 0%, #eee 95%, #e5e5e5 100%);
+  border-bottom: 1px solid #ccc;
+}

@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 
 // import RoundRect from "../shapes/round-rect";
+import PicturesPane from "./PicturesPane";
+import FunctionsPane from "./FunctionsPane";
+import ComputationGraph from "./ComputationGraph";
+
+import exampleFunctions from "../examples/functions";
+import exampleGraph from "../examples/computation-graph";
 
 class App extends Component {
   render() {
     return (
-      <div className="panes">
-        <div className="left-pane">
-          <div className="pane-inner"></div>
+      <div id="root" className="panes">
+
+        <PicturesPane />
+
+        <div className="horizontal-panes">
+          <FunctionsPane functions={exampleFunctions} />
+          <ComputationGraph graph={exampleGraph} />
         </div>
-        <div className="middle-pane">
-          <div className="pane-inner"></div>
-        </div>
-        <div className="right-pane">
-          <div className="pane-inner"></div>
-        </div>
+
       </div>
     );
   }
