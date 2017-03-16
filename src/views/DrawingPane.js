@@ -7,7 +7,7 @@ import subpicturesExample from "../examples/subpictures";
 class DrawingPane extends Component {
   render() {
     const subpictures = subpicturesExample.map((subpicture) =>
-      <div className="subpicture">
+      <div className="subpicture" key={subpicture.name}>
         <span className="subpicture-name">{subpicture.name}</span>
         <span className="subpicture-context {subpicture.context == null : 'global' : ''}">{ subpicture.context || "Global" }</span>
       </div>

@@ -27,15 +27,15 @@ function NormalVariable(variable) {
 }
 
 function ArrayVariable(variable) {
-  const subvariables = variable.subvariables.map((subvariable) =>
-    <div className="variables-item" key={variable.name}>
-      <div className="variables-item-label-container">
-        <span className="variables-item-label variables-item-array-subvariable">
-          {subvariable.name}
-        </span>
-      </div>
-    </div>
-  )
+  // const subvariables = variable.subvariables.map((subvariable) =>
+  //   <div className="variables-item" key={variable.name}>
+  //     <div className="variables-item-label-container">
+  //       <span className="variables-item-label variables-item-array-subvariable">
+  //         {subvariable.name}
+  //       </span>
+  //     </div>
+  //   </div>
+  // )
   return (
     <div className="variables-item" key={variable.name}>
       <div className="variables-item-label-container">

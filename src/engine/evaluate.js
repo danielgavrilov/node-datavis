@@ -2,19 +2,17 @@ import _ from "lodash";
 
 import { MismatchingArguments, CircularReference } from "./errors";
 
-export function evaluate({ functions, variables, graph }, results={}) {
+export default function evaluate({ functions, variables, graph }, results={}) {
 
-  results.variables = {
-    "width": 960
-  };
+  results.variables = results.variables || {};
+  results.graph     = results.graph     || {};
 
-  results.graph = {
-    "ref": {
-      processing: true,
-      value: 42
-    }
-  };
+  _.keys(variables).forEach((variable) => {
+    const nodeId = variables[variable].__ref;
+    results.variables[variable] = evaluateNode(nodeId, { functions, variables, graph }, results);
+  });
 
+  return results;
 }
 
 function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
@@ -25,17 +23,17 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
   if (result != null) {
 
     // do not evaluate if processing, circular reference
-    if (result.processing) {
+    if (result.done === false) {
       throw new CircularReference({ id: nodeId });
 
     // do not evaluate already evaluated
-    } else if (result.value != null) {
+    } else if (result.done === true) {
       return result.value;
     }
 
   // populate with default if no result recorded
   } else {
-    result = results.graph[nodeId] = { processing: true };
+    result = results.graph[nodeId] = { done: false };
   }
 
   const { value, definition, __ref } = item;
@@ -43,7 +41,7 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
   let returnValue;
 
   // constant
-  if (value != null) {
+  if (value !== undefined) {
     // we are done
     returnValue = value;
 
@@ -75,27 +73,15 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
       throw new Error("Function definition '" + definition + "' does not have a function body.")
     }
 
-
     const args = item.in.map((id) => evaluateNode(id, { functions, variables, graph }, results));
-
-    return
+    returnValue = fn(...args);
 
   } else {
     throw new Error("evaluateNode couldn't recognise passed item. This shouldn't happen. IT'S ALL HOPELESS.");
   }
 
+  result.done = true;
+  result.value = returnValue;
 
-  result.processing = false;
   return returnValue;
-
-
-  // make sure all input nodes have a result
-  node.in.forEach((key) => {
-    const inputNode = graph[key];
-    evaluate(inputNode, graph, results);
-  });
-
-  // then calculate current node
-  const args = node.in.map((key) => results[key].value);
-  results[node.key] = { value: node.definition.out.func(...args) };
 }

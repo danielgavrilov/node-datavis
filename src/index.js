@@ -11,3 +11,8 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+
+import evaluate from "./engine/evaluate";
+import { functions, variables, graph } from "./engine/example";
+
+console.log(evaluate({ functions, variables, graph }));

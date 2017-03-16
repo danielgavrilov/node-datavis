@@ -37,6 +37,17 @@ export const functions = {
       fn: _.min
     }
   },
+  extent: {
+    in: [{
+      name: "list",
+      type: [Array]
+    }],
+    out: {
+      name: "extent",
+      type: [Array],
+      fn: (list) => [_.min(list), _.max(list)]
+    }
+  },
   "first": {
     in: [{
       name: "list",
@@ -52,46 +63,42 @@ export const functions = {
 
 export const variables = {
   "width": {
-    expression: "960"
+    __ref: "var_width"
   },
   "height": {
-    expression: "480"
+    __ref: "var_height"
   },
   "result": {
-    __ref: "function1"
+    __ref: "extent"
   }
 };
-
-// TODO are ID's necessary?
 
 export const graph = {
 
   "var_width": {
-    id: "var_width",
     value: 960
   },
 
+  "var_height": {
+    value: 480
+  },
+
   "dataset": {
-    id: "dataset",
-    definition: {
-      in: [],
-      out: {
-        type: [Array],
-        value: [1,6,2,3,6]
-      }
-    },
-    in: []
+    value: [1,6,2,3,6]
   },
 
   "max": {
-    id: "max",
     definition: "max",
     in: ["dataset"],
   },
 
   "min": {
-    id: "min",
     definition: "min",
     in: ["dataset"],
   },
+
+  "extent": {
+    definition: "extent",
+    in: ["dataset"],
+  }
 }
