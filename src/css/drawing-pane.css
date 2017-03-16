@@ -1,0 +1,66 @@
+.drawing-pane {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-container {
+  background-color: #ddd;
+  box-shadow: inset 0 2px 2px 1px rgba(0,0,0,.1);
+  border-bottom: 1px solid #ccc;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas {
+  background-color: white;
+  box-shadow: 0 2px 2px 2px rgba(0,0,0,.1);
+}
+
+.inspector-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.subpictures {
+  flex: 1;
+  border-right: 1px solid #ccc;
+  background: #eee;
+}
+
+.subpicture-inspector {
+  flex: 2;
+}
+
+.subpicture {
+  font-size: 1.4em;
+  padding: .3em .4em;
+  background: linear-gradient(#888, #777);
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #999;
+  color: white;
+  cursor: pointer;
+}
+
+.subpicture:hover {
+  background: linear-gradient(#808080, #707070);
+}
+
+.subpicture-name {
+  font-weight: bold;
+}
+
+.subpicture-context {
+  font-size: .9em;
+  padding: 0em .5em;
+  color: rgba(255,255,255,.6);
+  float: right;
+  background-color: rgba(0,0,0,.1);
+  border: 1px solid #666;
+  border-radius: 1em;
+  box-shadow: inset 0 2px 2px rgba(0,0,0,.1),
+              0 1px 0 rgba(255,255,255,.1);
+}

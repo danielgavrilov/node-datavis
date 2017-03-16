@@ -1,23 +1,52 @@
 .functions-pane {
-  flex: 0 0 20em;
+  flex: 0 0 180px;
   border-right: 1px solid #bbb;
-  background-color: #eee;
+  background-color: #e4e4e4;
+  display: flex;
+  flex-direction: column;
 }
 
-.functions-list {}
+.functions-pane-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,.2);
+  background: linear-gradient(white, #f1f1f1);
+  border-bottom: 1px solid #bbb;
+  padding: .35em;
+  flex: 0;
+}
+
+.functions-pane-search input {
+  font-size: 1.4em;
+  background-color: white;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  width: 100%;
+  padding: .5em .6em;
+  outline: none;
+  position: relative;
+  z-index: 2;
+}
+
+.functions-list {
+  flex: 1;
+  overflow-y: scroll;
+}
 
 .functions-item {
   font-size: 1.4em;
   font-weight: bold;
   padding: .5em;
-  border: 1px solid #ccc;
-  border-radius: .2em;
+  position: relative;
+  border-bottom: 1px solid #ccc;
   background: linear-gradient(white, #f7f7f7);
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  margin: 2px;
-  transition: color 200ms ease,
-              border-color 200ms linear,
-              box-shadow 200ms linear;
+  box-shadow: none;
+  transition: color 100ms ease,
+              border-color 100ms linear,
+              box-shadow 100ms linear;
 }
 
 .functions-item:hover {
@@ -25,4 +54,5 @@
   border-color: #bbb;
   color: #309ee4;
   cursor: pointer;
+  z-index: 1;
 }

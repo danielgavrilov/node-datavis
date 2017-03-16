@@ -36,6 +36,8 @@ export default {
     "mode": MODES,
     "draggingType": DRAGGING_TYPE,
 
+    "highlight": {},
+
     // separate this.state?
     "picturesPane": {
 
@@ -47,7 +49,7 @@ export default {
     },
 
     // computation graph this.state?
-    "computationGraph": {
+    "computationPane": {
       "selected": {
         type: "node" | "connector",
         id: "id"
@@ -55,7 +57,7 @@ export default {
     },
 
     "picturePane": {
-      width: 700,
+
     },
 
   },

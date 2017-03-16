@@ -1,10 +1,13 @@
-.computation-graph {
+.computation-pane {
   flex: 1;
+  border-right: 3px solid #ccc;
+  position: relative;
 }
 
-.computation-graph-nodes {}
+.computation-nodes {}
 
-.computation-graph-node {
+.computation-node {
+  position: absolute;
   display: inline-block;
   font-size: 1.4em;
   font-weight: bold;
@@ -19,7 +22,7 @@
               box-shadow 200ms linear;
 }
 
-.computation-graph-node:hover {
+.computation-node:hover {
   box-shadow: 0 2px 2px rgba(0,0,0,.08);
   border-color: #bbb;
   color: #309ee4;

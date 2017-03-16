@@ -1,0 +1,64 @@
+.variables-pane {
+  flex: 0 0 210px;
+  border-right: 1px solid #bbb;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.variables-pane-title {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255,255,255,.2);
+  background: linear-gradient(white, #f1f1f1);
+  border-bottom: 1px solid #bbb;
+  padding: .35em;
+  flex: 0;
+}
+
+.variables-list {
+  flex: 1;
+  overflow-y: scroll;
+  padding: .5em;
+}
+
+.variables-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.4em;
+  margin-bottom: .35em;
+}
+
+.variables-item-label-container {
+  flex: 1;
+}
+
+.variables-item-expression-container {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.variables-item-label {
+  display: inline-block;
+  background-color: #0488b9;
+  padding: .2em .5em;
+  color: white;
+  border: 1px solid #05749d;
+  border-radius: 1em;
+}
+
+.variables-item-expression input {
+  font-family: "Source Code Pro";
+  font-weight: 400;
+  color: #3257b4;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  display: block;
+  width: 100%;
+}
+
+.variables-item-label {}
