@@ -5,6 +5,13 @@ export class CircularReference extends Error {
   }
 }
 
+export class UndefinedVariable extends Error {
+  constructor({ name }) {
+    super("Undefined variable: " + name);
+    this.name = name;
+  }
+}
+
 export class MismatchingArguments extends Error {
   constructor({ name, expected, got }) {
     super("Mismatching number of arguments for function '" + name + "' expected: " + expected + ", got: " + got);

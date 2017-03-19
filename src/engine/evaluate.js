@@ -1,6 +1,12 @@
 import _ from "lodash";
 
-import { MismatchingArguments, CircularReference } from "./errors";
+import {
+  MismatchingArguments,
+  UndefinedVariable,
+  CircularReference
+} from "./errors";
+
+import { parse as parseExpr } from "./expression";
 
 export default function evaluate({ functions, variables, graph }, results={}) {
 
@@ -76,8 +82,18 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
     const args = item.in.map((id) => evaluateNode(id, { functions, variables, graph }, results));
     returnValue = fn(...args);
 
+  // expression containing variables
   } else if (expression != null) {
-     
+    const { fn, params } = parseExpr(expression);
+    const args = params.map((variable) => {
+      if (variables[variable] != null) {
+        return evaluateNode(variables[variable].__ref, { functions, variables, graph }, results);
+      } else {
+        throw new UndefinedVariable({ name: variable });
+      }
+    });
+    returnValue = fn(...args);
+
   } else {
     throw new Error("evaluateNode couldn't recognise passed item. This shouldn't happen. IT'S ALL HOPELESS.");
   }
