@@ -1,5 +1,6 @@
 /* eslint-disable no-new-func */
 
+import _ from "lodash";
 import { reIdentifier, reReserved } from "./regex";
 
 export function evaluate(jsString, variables={}) {
@@ -25,5 +26,5 @@ export function extractVariables(jsString) {
       variables.push(x[0]);
     }
   } while (x != null);
-  return variables;
+  return _.uniq(variables);
 }
