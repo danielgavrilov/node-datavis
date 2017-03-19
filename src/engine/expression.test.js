@@ -15,6 +15,14 @@ describe("evaluate", () => {
     expect(evaluate("x === undefined", {})).toEqual(true);
   });
 
+  it("should accept multiple scopes", () => {
+    expect(evaluate("x + y + z", { x: 1 }, { y: 1 }, { z: 1 })).toEqual(3);
+  });
+
+  it("should consider scopes in order", () => {
+    expect(evaluate("x + y", { x: 1 }, { x: 2, y: 1 })).toEqual(2);
+  });
+
 });
 
 

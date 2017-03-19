@@ -3,9 +3,15 @@
 import _ from "lodash";
 import { reIdentifier, reReserved } from "./regex";
 
-export function evaluate(jsString, variables={}) {
+export function evaluate(jsString, ...scopes) {
   const { fn, params } = parse(jsString);
-  const args = params.map((param) => variables[param]);
+  const args = params.map((param) => {
+    for (const scope of scopes) {
+      if (scope[param] !== undefined) {
+        return scope[param];
+      }
+    }
+  });
   return fn(...args);
 }
 
