@@ -1,6 +1,6 @@
 
 
-function insert({ picture, override, context }) {
+function generate({ picture, override, scope }) {
 
 }
 
@@ -14,13 +14,13 @@ const picture = {
       "x": "width + height",
       "width": "960"
     },
-    context: null || "variable-name",
-    picture: "identifier",
+    scope: null || "variable-name",
+    picture: "bar-chart",
   }, {
     override: {
       "x": "width",
     },
-    context: "array",
+    scope: "array",
     picture: "rect"
   }]
 }

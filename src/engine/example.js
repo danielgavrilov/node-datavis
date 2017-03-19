@@ -78,13 +78,17 @@ export const graph = {
   "var_width": {
     type: "VARIABLE",
     variable: "width",
-    value: 960
+    value: 960,
+    visible: false,
+    properties: {}
   },
 
   "var_height": {
     type: "VARIABLE",
     variable: "height",
-    expression: "width * 2"
+    expression: "width * 2",
+    visible: false,
+    properties: {}
   },
 
   // actually visible variable in computation
@@ -92,11 +96,21 @@ export const graph = {
   "hash1313": {
     type: "VARIABLE_REFERENCE",
     __ref: "var_height",
+    visible: true,
+    properties: {
+      x: 10,
+      y: 10,
+    }
   },
 
   "dataset": {
-    type: "SOURCE",
-    value: [1,6,2,3,6]
+    type: "VALUE",
+    value: [1,6,2,3,6],
+    visible: true,
+    properties: {
+      x: 10,
+      y: 100,
+    }
   },
 
   "max": {
@@ -115,5 +129,7 @@ export const graph = {
     type: "FUNCTION",
     definition: "extent",
     in: ["dataset"],
-  }
+  },
+
+
 }

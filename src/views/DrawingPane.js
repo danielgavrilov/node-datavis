@@ -9,7 +9,7 @@ class DrawingPane extends Component {
     const subpictures = this.props.subpictures.map((subpicture) =>
       <div className="subpicture" key={subpicture.name}>
         <span className="subpicture-name">{subpicture.name}</span>
-        <span className="subpicture-context {subpicture.context == null : 'global' : ''}">{ subpicture.context || "Global" }</span>
+        <span className="subpicture-scope {subpicture.scope == null : 'global' : ''}">{ subpicture.scope || "Global" }</span>
       </div>
     );
     return (

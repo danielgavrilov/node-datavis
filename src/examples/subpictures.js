@@ -1,7 +1,7 @@
 export default [{
   name: "rect",
-  context: null
+  scope: null
 }, {
   name: "circle",
-  context: "population_data"
+  scope: "population_data"
 }];
