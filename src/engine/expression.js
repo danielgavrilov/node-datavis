@@ -1,3 +1,29 @@
-export function parse(variables, text) {}
+/* eslint-disable no-new-func */
 
-function extractIdentifiers(jsString) {}
+import { reIdentifier, reReserved } from "./regex";
+
+export function evaluate(jsString, variables={}) {
+  const { fn, params } = parse(jsString);
+  const args = params.map((param) => variables[param]);
+  return fn(...args);
+}
+
+export function parse(jsString) {
+  const params = extractVariables(jsString);
+  return {
+    fn: new Function(...params, "return " + jsString),
+    params
+  }
+}
+
+export function extractVariables(jsString) {
+  const variables = [];
+  let x;
+  do {
+    x = reIdentifier.exec(jsString);
+    if (x != null && !reReserved.test(x[0])) {
+      variables.push(x[0]);
+    }
+  } while (x != null);
+  return variables;
+}

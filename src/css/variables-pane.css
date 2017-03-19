@@ -1,5 +1,5 @@
 .variables-pane {
-  flex: 0 0 210px;
+  flex: 1;
   border-right: 1px solid #bbb;
   background-color: #eee;
   display: flex;

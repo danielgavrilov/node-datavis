@@ -76,28 +76,43 @@ export const variables = {
 export const graph = {
 
   "var_width": {
+    type: "VARIABLE",
+    variable: "width",
     value: 960
   },
 
   "var_height": {
-    value: 480
+    type: "VARIABLE",
+    variable: "height",
+    expression: "width * 2"
+  },
+
+  // actually visible variable in computation
+  // is a reference to original
+  "hash1313": {
+    type: "VARIABLE_REFERENCE",
+    __ref: "var_height",
   },
 
   "dataset": {
+    type: "SOURCE",
     value: [1,6,2,3,6]
   },
 
   "max": {
+    type: "FUNCTION",
     definition: "max",
     in: ["dataset"],
   },
 
   "min": {
+    type: "FUNCTION",
     definition: "min",
     in: ["dataset"],
   },
 
   "extent": {
+    type: "FUNCTION",
     definition: "extent",
     in: ["dataset"],
   }

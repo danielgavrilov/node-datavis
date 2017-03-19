@@ -1,6 +1,6 @@
 .computation-pane {
   flex: 1;
-  border-right: 3px solid #ccc;
+  border-right: 1px solid #ccc;
   position: relative;
 }
 

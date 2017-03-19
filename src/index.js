@@ -15,4 +15,7 @@ ReactDOM.render(
 import evaluate from "./engine/evaluate";
 import { functions, variables, graph } from "./engine/example";
 
-console.log(evaluate({ functions, variables, graph }));
+import { parse } from "./engine/expression";
+
+// console.log(evaluate({ functions, variables, graph }));
+console.log(parse("width + height").fn(2, 5));

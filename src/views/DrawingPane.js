@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 import "../css/drawing-pane.css";
 
-import subpicturesExample from "../examples/subpictures";
+import VariablesPane from "./VariablesPane";
 
 class DrawingPane extends Component {
   render() {
-    const subpictures = subpicturesExample.map((subpicture) =>
+    const subpictures = this.props.subpictures.map((subpicture) =>
       <div className="subpicture" key={subpicture.name}>
         <span className="subpicture-name">{subpicture.name}</span>
         <span className="subpicture-context {subpicture.context == null : 'global' : ''}">{ subpicture.context || "Global" }</span>
@@ -18,6 +18,7 @@ class DrawingPane extends Component {
           <svg className="canvas" width="660" height="290" />
         </div>
         <div className="inspector-container">
+          <VariablesPane variables={this.props.variables} />
           <div className="subpictures">
             {subpictures}
           </div>

@@ -36,7 +36,7 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
     result = results.graph[nodeId] = { done: false };
   }
 
-  const { value, definition, __ref } = item;
+  const { value, definition, expression, __ref } = item;
 
   let returnValue;
 
@@ -76,6 +76,8 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
     const args = item.in.map((id) => evaluateNode(id, { functions, variables, graph }, results));
     returnValue = fn(...args);
 
+  } else if (expression != null) {
+     
   } else {
     throw new Error("evaluateNode couldn't recognise passed item. This shouldn't happen. IT'S ALL HOPELESS.");
   }
