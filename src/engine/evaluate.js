@@ -3,19 +3,25 @@ import _ from "lodash";
 import {
   MismatchingArguments,
   UndefinedVariable,
+  UndefinedFunction,
   CircularReference
 } from "./errors";
 
 import { parse as parseExpr } from "./expression";
 
-export default function evaluate({ functions, variables, graph }, results={}) {
+export default function evaluate(program, results={}) {
 
   results.variables = results.variables || {};
   results.graph     = results.graph     || {};
 
-  _.keys(variables).forEach((variable) => {
-    const nodeId = variables[variable].__ref;
-    results.variables[variable] = evaluateNode(nodeId, { functions, variables, graph }, results);
+  const functions = program.get("functions"),
+        variables = program.get("variables"),
+        graph = program.get("graph");
+
+  variables.entrySeq().forEach(([variable, node]) => {
+    if (results.variables[variable] === undefined) {
+      results.variables[variable] = evaluateNode(node.get("__ref"), { functions, variables, graph }, results);
+    }
   });
 
   return results;
@@ -23,7 +29,7 @@ export default function evaluate({ functions, variables, graph }, results={}) {
 
 function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
 
-  const item = graph[nodeId];
+  const item = graph.get(nodeId);
   let result = results.graph[nodeId];
 
   if (result != null) {
@@ -42,14 +48,17 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
     result = results.graph[nodeId] = { done: false };
   }
 
-  const { value, definition, expression, __ref } = item;
+  const value = item.get("value"),
+        definition = item.get("definition"),
+        expression = item.get("expression"),
+        __ref = item.get("__ref");
 
   let returnValue;
 
   // constant
   if (value !== undefined) {
     // we are done
-    returnValue = value;
+    returnValue = value();
 
   // reference to a node
   } else if (__ref != null) {
@@ -58,36 +67,48 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
   // function node
   } else if (definition != null) {
 
-    const def = functions[definition];
+    const def = functions.get(definition);
 
     if (def == null) {
-      throw new Error("Function definition '" + definition + "' does not exist.");
+      throw new UndefinedFunction({ name: definition });
     }
 
     // detect mismatching argument lengths
     // TODO detect type mismatches? how would warnings be stored?
-    if (def.in.length !== item.in.length) {
+
+    const defIn = def.get("in").count();
+    const itemIn = def.get("in").count();
+
+    if (defIn !== itemIn) {
       throw new MismatchingArguments({
         name: definition,
-        expected: def.in.length,
-        got: item.in.length
+        expected: defIn,
+        got: itemIn
       });
     }
 
-    const fn = def.out && def.out.fn;
+    const fn = def.get("fn");
+
     if (fn == null) {
       throw new Error("Function definition '" + definition + "' does not have a function body.")
     }
 
-    const args = item.in.map((id) => evaluateNode(id, { functions, variables, graph }, results));
+    const args = item.get("in")
+      .toJS()
+      .map((id) => evaluateNode(id, { functions, variables, graph }, results));
+
     returnValue = fn(...args);
 
   // expression containing variables
   } else if (expression != null) {
     const { fn, params } = parseExpr(expression);
     const args = params.map((variable) => {
-      if (variables[variable] != null) {
-        return evaluateNode(variables[variable].__ref, { functions, variables, graph }, results);
+      if (results.variables[variable] !== undefined) {
+        return results.variables[variable];
+      }
+      const node = variables.get(variable);
+      if (node != null) {
+        return evaluateNode(node.get("__ref"), { functions, variables, graph }, results);
       } else {
         throw new UndefinedVariable({ name: variable });
       }

@@ -12,6 +12,13 @@ export class UndefinedVariable extends Error {
   }
 }
 
+export class UndefinedFunction extends Error {
+  constructor({ name }) {
+    super("Undefined function: " + name);
+    this.name = name;
+  }
+}
+
 export class MismatchingArguments extends Error {
   constructor({ name, expected, got }) {
     super("Mismatching number of arguments for function '" + name + "' expected: " + expected + ", got: " + got);
