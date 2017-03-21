@@ -1,7 +1,7 @@
 import _ from "lodash";
-import Immutable from "immutable";
+import { fromJS } from "immutable";
 
-export default Immutable.fromJS({
+export default fromJS({
 
   functions: {
     "add": {

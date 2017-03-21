@@ -1,4 +1,4 @@
-import Immutable from "immutable";
+import { fromJS } from "immutable";
 
 import evaluate from "./evaluate";
 
@@ -11,7 +11,7 @@ import {
 
 it("should follow variable references", () => {
 
-  const program = Immutable.fromJS({
+  const program = fromJS({
     functions: {},
     variables: {
       x: { __ref: "var_x" }
@@ -30,7 +30,7 @@ it("should follow variable references", () => {
 it("should handle objects and arrays", () => {
   // this test is to check they don't accidentally get converted to Immutable objects
 
-  const program = Immutable.fromJS({
+  const program = fromJS({
     functions: {},
     variables: {
       x: { __ref: "var_x" }
@@ -48,7 +48,7 @@ it("should handle objects and arrays", () => {
 
 it("should evaluate functions", () => {
 
-  const program = Immutable.fromJS({
+  const program = fromJS({
     functions: {
       "add": {
         in: [{
@@ -88,7 +88,7 @@ it("should evaluate functions", () => {
 
 it("should override variables", () => {
 
-  const program = Immutable.fromJS({
+  const program = fromJS({
     functions: {},
     variables: {
       x: { __ref: "var_x" }
@@ -112,7 +112,7 @@ it("should override variables", () => {
 
 it("should evaluate expressions with overriden variables", () => {
 
-  const program = Immutable.fromJS({
+  const program = fromJS({
     functions: {},
     variables: {
       x: { __ref: "var_x" },
@@ -140,7 +140,7 @@ it("should evaluate expressions with overriden variables", () => {
 
 it("should detect circular references", () => {
 
-  const program = Immutable.fromJS({
+  const program = fromJS({
     functions: {},
     variables: {
       x: { __ref: "var_x" },
