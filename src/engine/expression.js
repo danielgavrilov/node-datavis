@@ -4,7 +4,7 @@ import _ from "lodash";
 import { reIdentifier, reReserved } from "./regex";
 
 export function evaluate(jsString, ...scopes) {
-  const { fn, params } = parse(jsString);
+  const { fn, params } = compile(jsString);
   const args = params.map((param) => {
     for (const scope of scopes) {
       if (scope[param] !== undefined) {
@@ -15,7 +15,7 @@ export function evaluate(jsString, ...scopes) {
   return fn(...args);
 }
 
-export function parse(jsString) {
+export function compile(jsString) {
   const params = extractVariables(jsString);
   return {
     fn: new Function(...params, "return " + jsString),

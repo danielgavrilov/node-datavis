@@ -15,7 +15,7 @@ ReactDOM.render(
 import evaluate from "./engine/evaluate";
 import exampleProgram from "./engine/example";
 
-import { parse } from "./engine/expression";
+import { compile } from "./engine/expression";
 
 console.log(evaluate(exampleProgram));
-// console.log(parse("width + height").fn(2, 5));
+// console.log(compile("width + height").fn(2, 5));

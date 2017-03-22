@@ -7,7 +7,7 @@ import {
   CircularReference
 } from "./errors";
 
-import { parse as parseExpr } from "./expression";
+import { compile } from "./expression";
 
 export default function evaluate(program, results={}) {
 
@@ -101,7 +101,7 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
 
   // expression containing variables
   } else if (expression != null) {
-    const { fn, params } = parseExpr(expression);
+    const { fn, params } = compile(expression);
     const args = params.map((variable) => {
       if (results.variables[variable] !== undefined) {
         return results.variables[variable];

@@ -1,6 +1,6 @@
 import {
   evaluate,
-  parse,
+  compile,
   extractVariables
 } from "./expression";
 
@@ -26,15 +26,15 @@ describe("evaluate", () => {
 });
 
 
-describe("parse", () => {
+describe("compile", () => {
 
   it("should create a function", () => {
-    const { fn } = parse("x + y");
+    const { fn } = compile("x + y");
     expect(fn(3,4)).toEqual(7);
   });
 
   it("should handle reserved words", () => {
-    const { fn } = parse("x && true");
+    const { fn } = compile("x && true");
     expect(fn(false)).toEqual(false);
   });
 
