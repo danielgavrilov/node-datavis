@@ -19,7 +19,7 @@ export default function evaluate(program, results={}) {
         graph = program.get("graph");
 
   variables.entrySeq().forEach(([variable, node]) => {
-    if (results.variables[variable] === undefined) {
+    if (!_.has(results.variables, variable)) {
       results.variables[variable] = evaluateNode(node.get("__ref"), { functions, variables, graph }, results);
     }
   });
