@@ -19,6 +19,21 @@ export class UndefinedFunction extends Error {
   }
 }
 
+export class InexistingPicture extends Error {
+  constructor({ name }) {
+    super("Inexisting picture: " + name);
+    this.name = name;
+  }
+}
+
+export class InvalidScope extends Error {
+  constructor({ name, type }) {
+    super("Variable '" + name + "' is not a valid scope variable. Expected an array, but got: " + type);
+    this.name = name;
+    this.type = type;
+  }
+}
+
 export class MismatchingArguments extends Error {
   constructor({ name, expected, got }) {
     super("Mismatching number of arguments for function '" + name + "' expected: " + expected + ", got: " + got);
