@@ -9,14 +9,15 @@ import {
 
 import { compile } from "./expression";
 
-export default function evaluate(program, results={}) {
+
+export default function evaluate(picture, results={}) {
 
   results.variables = results.variables || {};
   results.graph     = results.graph     || {};
 
-  const functions = program.get("functions"),
-        variables = program.get("variables"),
-        graph = program.get("graph");
+  const functions = picture.get("functions"),
+        variables = picture.get("variables"),
+        graph = picture.get("graph");
 
   variables.entrySeq().forEach(([variable, node]) => {
     if (!_.has(results.variables, variable)) {
@@ -26,6 +27,7 @@ export default function evaluate(program, results={}) {
 
   return results;
 }
+
 
 function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
 
