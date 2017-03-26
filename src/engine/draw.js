@@ -10,14 +10,12 @@ import primitives from "../primitives";
 import evaluate from "./evaluate";
 import parameters from "./parameters";
 
+const isPrimitive = _.curry(_.has)(primitives);
 
-export default function draw(pictures, pictureName, params) {
+export function buildPictureSpec(pictures, pictureName, params={}) {
 
-  if (_.has(primitives, pictureName)) {
-    return {
-      picture: pictureName,
-      params
-    }
+  if (isPrimitive(pictureName)) {
+    return params;
   } else if (!pictures.has(pictureName)) {
     throw new InexistingPicture({ name: pictureName });
   }
@@ -26,28 +24,31 @@ export default function draw(pictures, pictureName, params) {
 
   // evaluate variables
 
-  const { variables } = evaluate(picture, { variables: params });
+  const { variables } = evaluate(picture, params);
 
   // then pass variables on to create pictures
 
   return picture.get("pictures").map((picture) => {
 
     const override = picture.get("override").toJS();
-    const pictureName = picture.get("picture");
+    const nestedPictureName = picture.get("picture");
     const scopeName = picture.get("scope");
     const scopes = getScopes(variables, scopeName);
     const paramsCollection = parameters(override, variables, scopes);
-
-    const children = paramsCollection.map((params) => {
-      return draw(pictures, pictureName, params);
+    const collection = paramsCollection.map((params) => {
+      const prop = isPrimitive(nestedPictureName) ? "params" : "children";
+      return {
+        instance: nestedPictureName,
+        [prop]: buildPictureSpec(pictures, nestedPictureName, params)
+      };
     });
 
     return {
-      picture: pictureName,
-      children
-    }
+      picture: nestedPictureName,
+      collection
+    };
 
-  });
+  }).toJS();
 }
 
 

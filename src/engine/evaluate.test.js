@@ -18,7 +18,7 @@ it("should follow variable references", () => {
     },
     graph: {
       "var_x": {
-        value: () => 42
+        value: 42
       },
     }
   });
@@ -37,10 +37,12 @@ it("should handle objects and arrays", () => {
     },
     graph: {
       "var_x": {
-        value: () => [1,2,3]
+        value: null
       },
     }
-  });
+  }).setIn(["graph", "var_x", "value"], [1,2,3]);
+
+
 
   expect(evaluate(program).variables.x).toEqual([1,2,3]);
 
@@ -70,10 +72,10 @@ it("should evaluate functions", () => {
         __ref: "added"
       },
       value1: {
-        value: () => 5
+        value: 5
       },
       value2: {
-        value: () => 6
+        value: 6
       },
       "added": {
         definition: "add",
@@ -95,18 +97,16 @@ it("should override variables", () => {
     },
     graph: {
       "var_x": {
-        value: () => 42
+        value: 42
       },
     }
   });
 
-  const results = {
-    variables: {
-      x: 43
-    }
+  const override = {
+    x: 43
   };
 
-  expect(evaluate(program, results).variables.x).toEqual(43);
+  expect(evaluate(program, override).variables.x).toEqual(43);
 
 });
 
@@ -120,7 +120,7 @@ it("should evaluate expressions with overriden variables", () => {
     },
     graph: {
       "var_x": {
-        value: () => 42
+        value: 42
       },
       "var_y": {
         expression: "x + x"
@@ -128,13 +128,11 @@ it("should evaluate expressions with overriden variables", () => {
     }
   });
 
-  const results = {
-    variables: {
-      x: 43
-    }
+  const override = {
+    x: 43
   };
 
-  expect(evaluate(program, results).variables.y).toEqual(86);
+  expect(evaluate(program, override).variables.y).toEqual(86);
 
 });
 

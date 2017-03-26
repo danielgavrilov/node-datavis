@@ -10,14 +10,26 @@ import {
 import { compile } from "./expression";
 
 
-export default function evaluate(picture, results={}) {
+export default function evaluate(picture, override={}) {
 
-  results.variables = results.variables || {};
-  results.graph     = results.graph     || {};
+  const results = {
+    variables: {},
+    graph: {}
+  };
 
   const functions = picture.get("functions"),
         variables = picture.get("variables"),
         graph = picture.get("graph");
+
+  for (const variable in override) {
+    if (variables.has(variable)) {
+      const __ref = variables.get(variable).get("__ref");
+      results.graph[__ref] = {
+        done: true,
+        value: override[variable]
+      };
+    }
+  }
 
   variables.entrySeq().forEach(([variable, node]) => {
     if (!_.has(results.variables, variable)) {
@@ -60,7 +72,7 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
   // constant
   if (value !== undefined) {
     // we are done
-    returnValue = value();
+    returnValue = value;
 
   // reference to a node
   } else if (__ref != null) {
