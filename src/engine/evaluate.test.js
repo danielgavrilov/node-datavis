@@ -3,9 +3,6 @@ import { fromJS } from "immutable";
 import evaluate from "./evaluate";
 
 import {
-  MismatchingArguments,
-  UndefinedVariable,
-  UndefinedFunction,
   CircularReference
 } from "./errors";
 

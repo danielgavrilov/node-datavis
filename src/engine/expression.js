@@ -11,6 +11,7 @@ export function evaluate(jsString, ...scopes) {
         return scope[param];
       }
     }
+    return undefined;
   });
   return fn(...args);
 }
