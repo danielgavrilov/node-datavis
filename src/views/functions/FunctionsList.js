@@ -11,7 +11,7 @@ const FunctionsList = ({ functions, onFunctionClick }) => {
   }).toJS();
   return (
     <div className="functions-list">
-      {children.length ? children : <p>No functions found.</p>}
+      {children.length > 0 ? children : <p>No functions found.</p>}
     </div>
   )
 }
