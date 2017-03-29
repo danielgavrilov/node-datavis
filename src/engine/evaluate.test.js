@@ -133,7 +133,7 @@ it("should evaluate expressions with overriden variables", () => {
 
 });
 
-it("should detect circular references", () => {
+it("should detect circular references in expressions", () => {
 
   const program = fromJS({
     functions: {},
@@ -147,6 +147,39 @@ it("should detect circular references", () => {
       },
       "var_y": {
         expression: "x + x"
+      }
+    }
+  });
+
+  expect(() => {
+    evaluate(program)
+  }).toThrow(CircularReference);
+
+});
+
+it("should detect circular references in graphs", () => {
+
+  const program = fromJS({
+    functions: {
+      test: {
+        in: [{}],
+        out: {},
+        fn: () => null
+      }
+    },
+    variables: {
+      x: {
+        __ref: "var_x"
+      }
+    },
+    graph: {
+      "var_x": {
+        definition: "test",
+        in: ["var_y"]
+      },
+      "var_y": {
+        definition: "test",
+        in: ["var_x"]
       }
     }
   });
