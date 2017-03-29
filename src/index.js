@@ -1,21 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
+import rootReducer from "./reducers";
 import App from './views/App';
+import exampleState from "./store-example";
 
 import './css/normalize.css';
 import './css/general.css';
 import './css/layout.css';
 
-ReactDOM.render(
-  <App />,
+const store = createStore(rootReducer, exampleState);
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
-
-import evaluate from "./engine/evaluate";
-import exampleProgram from "./engine/example";
-
-import { compile } from "./engine/expression";
-
-console.log(evaluate(exampleProgram));
-// console.log(compile("width + height").fn(2, 5));

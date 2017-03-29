@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 
 // import RoundRect from "../shapes/round-rect";
 import PicturesPane from "./PicturesPane";
-import FunctionsPane from "./FunctionsPane";
+import FunctionsPane from "./functions/FunctionsPane";
 import ComputationPane from "./ComputationPane";
 import DrawingPane from "./DrawingPane";
 
-import exampleFunctions from "../examples/functions";
 import exampleComputation from "../examples/computation";
 import exampleVariables from "../examples/variables";
 import exampleSubpictures from "../examples/subpictures";
@@ -20,7 +19,7 @@ class App extends Component {
         <PicturesPane />
 
         <div className="horizontal-panes">
-          <FunctionsPane functions={exampleFunctions} />
+          <FunctionsPane />
           <ComputationPane graph={exampleComputation} />
           <DrawingPane variables={exampleVariables} subpictures={exampleSubpictures} />
         </div>
