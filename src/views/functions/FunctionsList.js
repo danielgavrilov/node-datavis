@@ -3,12 +3,11 @@ import React from "react";
 import Function from "./Function";
 
 const FunctionsList = ({ functions, onFunctionClick }) => {
-  const children = functions.toList().map((fn) => {
-    const name = fn.get("name");
+  const children = functions.map((fn, id) => {
     return (
-      <Function key={name} name={name} onClick={() => onFunctionClick(name)} />
+      <Function key={id} name={id} onClick={() => onFunctionClick(id)} />
     );
-  }).toJS();
+  }).toList().toJS();
   return (
     <div className="functions-list">
       {children.length > 0 ? children : <p>No functions found.</p>}
