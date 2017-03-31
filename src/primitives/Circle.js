@@ -1,7 +1,13 @@
 import React from "react";
 
-export default function({ x, y, r }) {
+export const variables = {
+  cx: 0,
+  cy: 0,
+  r: 10
+};
+
+export function draw({ cx, cy, r }) {
   return (
-    <circle cx={x} cy={y} r={r} />
+    <circle cx={cx} cy={cy} r={r} />
   )
 }

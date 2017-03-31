@@ -1,7 +1,11 @@
-import Rect from "./Rect";
-import Circle from "./Circle";
+import React from "react";
+
+import createPrimitive from "./create-primitive";
+
+import rect from "./rect";
+import circle from "./circle";
 
 export default {
-  "rect": Rect,
-  "circle": Circle
+  "rect": createPrimitive(rect),
+  "circle": createPrimitive(circle)
 }
