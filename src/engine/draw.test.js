@@ -260,7 +260,3 @@ it("should draw nested subpictures", () => {
   });
 
 });
-
-it("should override variables in nested picture", () => {
-
-});
