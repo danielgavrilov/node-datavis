@@ -28,7 +28,7 @@ export function buildPictureSpec(pictures, pictureName, params={}) {
 
   // then pass variables on to create pictures
 
-  return picture.get("pictures").map((picture) => {
+  return picture.get("subpictures").map((picture) => {
 
     const override = picture.get("override").toJS();
     const nestedPictureName = picture.get("picture");

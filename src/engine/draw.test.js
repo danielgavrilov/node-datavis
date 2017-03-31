@@ -3,12 +3,12 @@ import { buildPictureSpec } from "./draw";
 
 it("should draw a primitive in a picture", () => {
 
-  const pictures = fromJS({
+  const subpictures = fromJS({
     test: {
       functions: {},
       variables: {},
       graph: {},
-      pictures: [{
+      subpictures: [{
         picture: "rect",
         override: {
           x: "0",
@@ -20,7 +20,7 @@ it("should draw a primitive in a picture", () => {
     }
   });
 
-  expect(buildPictureSpec(pictures, "test")).toContainEqual({
+  expect(buildPictureSpec(subpictures, "test")).toContainEqual({
     "picture": "rect",
     "collection": [{
       "instance": "rect",
@@ -37,7 +37,7 @@ it("should draw a primitive in a picture", () => {
 
 it("should draw primitives from scope in a picture", () => {
 
-  const pictures = fromJS({
+  const subpictures = fromJS({
     test: {
       functions: {},
       variables: {
@@ -50,7 +50,7 @@ it("should draw primitives from scope in a picture", () => {
           value: null // fill
         }
       },
-      pictures: [{
+      subpictures: [{
         picture: "rect",
         scope: "data",
         override: {
@@ -69,7 +69,7 @@ it("should draw primitives from scope in a picture", () => {
     y: 10
   }]);
 
-  const result = buildPictureSpec(pictures, "test");
+  const result = buildPictureSpec(subpictures, "test");
 
   expect(result[0].collection).toContainEqual({
     "instance": "rect",
@@ -95,7 +95,7 @@ it("should draw primitives from scope in a picture", () => {
 
 it("should draw multiple primitives from scope in a picture", () => {
 
-  const pictures = fromJS({
+  const subpictures = fromJS({
     test: {
       functions: {},
       variables: {
@@ -108,7 +108,7 @@ it("should draw multiple primitives from scope in a picture", () => {
           value: null // fill
         }
       },
-      pictures: [{
+      subpictures: [{
         picture: "rect",
         scope: "data",
         override: {
@@ -136,7 +136,7 @@ it("should draw multiple primitives from scope in a picture", () => {
     y: 10
   }]);
 
-  const result = buildPictureSpec(pictures, "test");
+  const result = buildPictureSpec(subpictures, "test");
 
   expect(result.length).toEqual(2);
 
@@ -164,9 +164,9 @@ it("should draw multiple primitives from scope in a picture", () => {
 
 });
 
-it("should draw nested pictures", () => {
+it("should draw nested subpictures", () => {
 
-  const pictures = fromJS({
+  const subpictures = fromJS({
     test: {
       functions: {},
       variables: {
@@ -179,7 +179,7 @@ it("should draw nested pictures", () => {
           value: null // fill
         }
       },
-      pictures: [{
+      subpictures: [{
         picture: "nested",
         override: {
           "data": "data"
@@ -215,7 +215,7 @@ it("should draw nested pictures", () => {
           in: ["data"]
         }
       },
-      pictures: [{
+      subpictures: [{
         picture: "rect",
         scope: "modified",
         override: {
@@ -234,7 +234,7 @@ it("should draw nested pictures", () => {
     y: 10
   }]);
 
-  const result = buildPictureSpec(pictures, "test");
+  const result = buildPictureSpec(subpictures, "test");
 
   expect(result[0].picture).toEqual("nested");
   expect(result[0].collection.length).toEqual(1);
