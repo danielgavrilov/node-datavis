@@ -62,7 +62,7 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
     result = results.graph[nodeId] = { done: false };
   }
 
-  const value = item.get("value"),
+  const value = item.get("__value"),
         definition = item.get("definition"),
         expression = item.get("expression"),
         __ref = item.get("__ref");

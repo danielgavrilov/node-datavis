@@ -11,7 +11,12 @@ import './css/normalize.css';
 import './css/general.css';
 import './css/layout.css';
 
-const store = createStore(rootReducer, exampleState);
+// TODO only temporray, remove later
+import evaluate from "./engine/evaluate";
+const results = evaluate(exampleState.getIn(["pictures", "example"]));
+const state = exampleState.setIn(["pictures", "example", "__results"], results);
+
+const store = createStore(rootReducer, state);
 
 render(
   <Provider store={store}>

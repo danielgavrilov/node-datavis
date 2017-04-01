@@ -16,16 +16,14 @@
   align-content: stretch;
 }
 
-.left-pane {
-
-}
-
-.middle-pane {
-
-}
-
-.right-pane {
+.vertical-panes {
   flex: 1;
-  border-left: 1px solid #bbb;
-  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: row;
+}
+
+.drawing-pane {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
 }

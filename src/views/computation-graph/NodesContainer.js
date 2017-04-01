@@ -5,7 +5,7 @@ import Node from "./Node";
 const NodesContainer = ({ nodes, selected }) => {
   const allNodes = nodes.map((node, nodeId) => (
     <Node key={nodeId}
-          name={nodeId}
+          name={node.get("name")}
           node={node}
           selected={nodeId === selected} />
   )).toList();

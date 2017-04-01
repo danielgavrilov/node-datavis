@@ -3,11 +3,7 @@ import React from "react";
 import ArcsContainer from "./ArcsContainer";
 import NodesContainer from "./NodesContainer";
 
-const ArcsAndNodes = ({
-  arcs,
-  nodes,
-  selected
-}) => {
+const ArcsAndNodes = ({ arcs, nodes, selected }) => {
 
   const selectedType = selected.get("type");
   const selectedItem = selected.get("item");

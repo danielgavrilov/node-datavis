@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 
-// import RoundRect from "../shapes/round-rect";
-import PicturesPane from "./PicturesPane";
+import PicturesPane from "./pictures/PicturesPane";
 import FunctionsPane from "./functions/FunctionsPane";
 import ComputationPane from "./computation-graph/ComputationPane";
-import DrawingPane from "./DrawingPane";
-
-import exampleVariables from "../examples/variables";
-import exampleSubpictures from "../examples/subpictures";
-
+import CanvasPane from "./canvas/CanvasPane";
+import VariablesPane from "./variables/VariablesPane";
+import SubpicturesPane from "./subpictures/SubpicturesPane";
+import InspectorPane from "./inspector/InspectorPane";
 
 class App extends Component {
   render() {
@@ -18,9 +16,22 @@ class App extends Component {
         <PicturesPane />
 
         <div className="horizontal-panes">
+
           <FunctionsPane />
           <ComputationPane />
-          <DrawingPane variables={exampleVariables} subpictures={exampleSubpictures} />
+
+          <div className="drawing-pane">
+
+            <CanvasPane />
+
+            <div className="vertical-panes">
+              <VariablesPane />
+              <SubpicturesPane />
+              <InspectorPane />
+            </div>
+
+          </div>
+
         </div>
 
       </div>

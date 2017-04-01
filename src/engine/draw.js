@@ -6,7 +6,7 @@ import {
   InexistingPicture
 } from "./errors";
 
-import primitives from "../primitives";
+import primitives from "../pictures/primitives";
 import evaluate from "./evaluate";
 import parameters from "./parameters";
 
@@ -14,41 +14,43 @@ const isPrimitive = _.curry(_.has)(primitives);
 
 export function buildPictureSpec(pictures, pictureName, params={}) {
 
-  if (isPrimitive(pictureName)) {
-    return params;
-  } else if (!pictures.has(pictureName)) {
-    throw new InexistingPicture({ name: pictureName });
-  }
-
   const picture = pictures.get(pictureName);
 
-  // evaluate variables
+  const children = picture.get("subpicturesOrder").reverse().map((subpictureId) => {
 
-  const { variables } = evaluate(picture, params);
-
-  // then pass variables on to create pictures
-
-  return picture.get("subpictures").map((picture) => {
-
-    const override = picture.get("override").toJS();
-    const nestedPictureName = picture.get("picture");
-    const scopeName = picture.get("scope");
-    const scopes = getScopes(variables, scopeName);
-    const paramsCollection = parameters(override, variables, scopes);
-    const collection = paramsCollection.map((params) => {
-      const prop = isPrimitive(nestedPictureName) ? "params" : "children";
-      return {
-        instance: nestedPictureName,
-        [prop]: buildPictureSpec(pictures, nestedPictureName, params)
-      };
+    const subpicture = picture.getIn(["subpictures", subpictureId]);
+    const override = subpicture.get("override").toJS();
+    const subpictureName = subpicture.get("picture");
+    const scopeName = subpicture.get("scope");
+    const scopes = getScopes(params, scopeName);
+    const paramsCollection = parameters(override, params, scopes);
+    const children = paramsCollection.map((params) => {
+      if (isPrimitive(subpictureName)) {
+        return { type: subpictureName, params };
+      } else if (!pictures.has(subpictureName)) {
+        throw new InexistingPicture({ name: subpictureName });
+      } else {
+        const picture = pictures.get(subpictureName);
+        const { variables } = evaluate(picture, params);
+        return buildPictureSpec(pictures, subpictureName, variables);
+      }
     });
 
     return {
-      picture: nestedPictureName,
-      collection
+      type: "group",
+      subpicture: subpictureId,
+      params: {},
+      children
     };
 
   }).toJS();
+
+  return {
+    type: "group",
+    picture: pictureName,
+    params,
+    children
+  };
 }
 
 

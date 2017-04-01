@@ -26,7 +26,7 @@ export default function(elementName, variables, propMap={}) {
   _.forEach(variables, (value, name) => {
 
     const variable = Map().set("__ref", name);
-    const node = Map().set("value", variables[name]);
+    const node = Map().set("__value", variables[name]);
 
     picture = picture.setIn(["variables", name], variable)
                      .setIn(["graph", name], node);
