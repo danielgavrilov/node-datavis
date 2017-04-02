@@ -16,13 +16,19 @@ import './css/layout.css';
 import evaluate from "./engine/evaluate";
 import { buildPictureSpec } from "./engine/draw";
 
-const pictureName = "example";
-const pictures = exampleState.get("pictures");
-const results = evaluate(pictures.get(pictureName));
-const preview = buildPictureSpec(pictures, pictureName, results.variables);
-const state = exampleState
-  .setIn(["pictures", pictureName, "__results"], results)
-  .setIn(["pictures", pictureName, "__preview"], preview);
+function evalPicture(state, pictureName) {
+  const pictures = state.get("pictures");
+  const results = evaluate(pictures.get(pictureName));
+  const preview = buildPictureSpec(pictures, pictureName, results.variables);
+  return state
+    .setIn(["pictures", pictureName, "__results"], results)
+    .setIn(["pictures", pictureName, "__preview"], preview);
+};
+
+let state = exampleState;
+state = evalPicture(state, "examplehashhash");
+state = evalPicture(state, "examplehashhash2");
+
 
 // END OF remove later
 

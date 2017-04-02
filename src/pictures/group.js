@@ -1,7 +1,7 @@
 import React from "react";
 
-const Group = ({ children }) => (
-  <g>
+const Group = ({ children, transform }) => (
+  <g transform={transform}>
     {children}
   </g>
 );

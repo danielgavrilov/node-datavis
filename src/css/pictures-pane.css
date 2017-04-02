@@ -1,5 +1,34 @@
 .pictures-pane {
-  flex: 0 0 120px;
+  flex: 0;
+  height: 13em;
   background: linear-gradient(#ddd 0%, #eee 95%, #e5e5e5 100%);
   border-bottom: 1px solid #ccc;
+}
+
+.pictures-list {
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.picture {
+  flex: 0;
+  height: 100%;
+  margin-right: 15px;
+  background-color: white;
+  box-shadow: 0 1px 2px 1px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+
+.picture.selected {
+  box-shadow: 0 2px 3px 1px rgba(0,0,0,.2),
+              0 0 0 2px #03a2cc;
+}
+
+.picture svg {
+  height: 100%;
 }

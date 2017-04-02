@@ -15,7 +15,7 @@ it("should follow variable references", () => {
     },
     graph: {
       "var_x": {
-        value: 42
+        __value: 42
       },
     }
   });
@@ -34,10 +34,10 @@ it("should handle objects and arrays", () => {
     },
     graph: {
       "var_x": {
-        value: null
+        __value: null
       },
     }
-  }).setIn(["graph", "var_x", "value"], [1,2,3]);
+  }).setIn(["graph", "var_x", "__value"], [1,2,3]);
 
 
 
@@ -69,10 +69,10 @@ it("should evaluate functions", () => {
         __ref: "added"
       },
       value1: {
-        value: 5
+        __value: 5
       },
       value2: {
-        value: 6
+        __value: 6
       },
       "added": {
         definition: "add",
@@ -94,7 +94,7 @@ it("should override variables", () => {
     },
     graph: {
       "var_x": {
-        value: 42
+        __value: 42
       },
     }
   });
@@ -117,7 +117,7 @@ it("should evaluate expressions with overriden variables", () => {
     },
     graph: {
       "var_x": {
-        value: 42
+        __value: 42
       },
       "var_y": {
         expression: "x + x"

@@ -1,10 +1,11 @@
 import { Map } from "immutable";
 
+import { SELECT_PICTURE } from "../actions";
+
 export default function(state=Map(), action) {
   switch (action.type) {
-    case "ADD":
-      const count = state.get("count") || 0;
-      return state.set("count", count + 1);
+    case SELECT_PICTURE:
+      return state.setIn(["editor", "pictureId"], action.pictureId);
     default:
       return state;
   }

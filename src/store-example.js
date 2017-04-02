@@ -5,19 +5,106 @@ export default fromJS({
 
   editor: {
 
-    pictureId: "example",
+    pictureId: "examplehashhash",
 
     computationPane: {
       selected: {
         type: "node",
         item: "test"
       }
+    },
+
+    picturesPane: {
+      picturesOrder: [
+        "examplehashhash",
+        "examplehashhash2"
+      ]
     }
 
   },
 
   pictures: {
-    "example": {
+    "examplehashhash": {
+      name: "example",
+      functions: {
+        "test": {
+          name: "test"
+        }
+      },
+      variables: {
+        "width": {
+          __ref: "var_width"
+        },
+        "height": {
+          __ref: "var_height"
+        },
+        "data": {
+          __ref: "datahashhash"
+        }
+      },
+      graph: {
+        "var_width": {
+          expression: "300",
+          visible: false
+        },
+        "var_height": {
+          expression: "300",
+          visible: false
+        },
+        "hashhashhash": {
+          name: "test",
+          expression: "width",
+          visible: true,
+          properties: {
+            x: 10,
+            y: 100
+          }
+        },
+        "datahashhash": {
+          name: "data",
+          __value: [{
+            x: 30,
+            y: 30,
+          }, {
+            x: 90,
+            y: 30,
+          }, {
+            x: 150,
+            y: 30
+          }],
+          visible: true,
+          properties: {
+            x: 10,
+            y: 10,
+          }
+        }
+      },
+      subpictures: {
+        "a": {
+          picture: "rect",
+          scope: null,
+          override: {
+            "fill": "\"red\""
+          },
+        },
+        "b": {
+          picture: "circle",
+          scope: "data",
+          override: {
+            "cx": "x",
+            "cy": "y",
+            "fill": "\"blue\""
+          }
+        }
+      },
+      subpicturesOrder: [ // top to bottom
+        "b", "a"
+      ],
+      results: {},
+      preview: {} // pictureSpec
+    },
+    "examplehashhash2": {
+      name: "example",
       functions: {
         "test": {
           name: "test"
@@ -58,11 +145,11 @@ export default fromJS({
             x: 0,
             y: 0,
           }, {
-            x: 30,
-            y: 30,
+            x: 120,
+            y: 60,
           }, {
-            x: 60,
-            y: 60
+            x: 240,
+            y: 120
           }],
           visible: true,
           properties: {
@@ -73,24 +160,16 @@ export default fromJS({
       },
       subpictures: {
         "a": {
-          picture: "rect",
-          scope: null,
-          override: {
-            "fill": "\"red\""
-          },
-        },
-        "b": {
-          picture: "circle",
+          picture: "examplehashhash",
           scope: "data",
           override: {
-            "cx": "x",
-            "cy": "y",
-            "fill": "\"blue\""
+            "x": "x",
+            "y": "y"
           }
         }
       },
       subpicturesOrder: [ // top to bottom
-        "b", "a"
+        "a"
       ],
       results: {},
       preview: {} // pictureSpec
