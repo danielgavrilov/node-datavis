@@ -1,3 +1,4 @@
+import { isString } from "lodash";
 import { fromJS, Iterable } from "immutable";
 
 export default fromJS({
@@ -35,11 +36,11 @@ export default fromJS({
       },
       graph: {
         "var_width": {
-          expression: "960",
+          expression: "500",
           visible: false
         },
         "var_height": {
-          expression: "480",
+          expression: "300",
           visible: false
         },
         "hashhashhash": {
@@ -53,7 +54,16 @@ export default fromJS({
         },
         "datahashhash": {
           name: "data",
-          __value: [],
+          __value: [{
+            x: 0,
+            y: 0,
+          }, {
+            x: 30,
+            y: 30,
+          }, {
+            x: 60,
+            y: 60
+          }],
           visible: true,
           properties: {
             x: 10,
@@ -65,19 +75,22 @@ export default fromJS({
         "a": {
           picture: "rect",
           scope: null,
-          override: {},
+          override: {
+            "fill": "\"red\""
+          },
         },
         "b": {
           picture: "circle",
           scope: "data",
           override: {
-            "x": "x",
-            "y": "y"
+            "cx": "x",
+            "cy": "y",
+            "fill": "\"blue\""
           }
         }
       },
       subpicturesOrder: [ // top to bottom
-        "a"
+        "b", "a"
       ],
       results: {},
       preview: {} // pictureSpec
@@ -85,7 +98,7 @@ export default fromJS({
   },
 
 }, function(key, value) {
-  if (key.indexOf("__") === 0) {
+  if (isString(key) && key.indexOf("__") === 0) {
     return value.toJS();
   } else {
     return Iterable.isKeyed(value) ? value.toMap() : value.toList();

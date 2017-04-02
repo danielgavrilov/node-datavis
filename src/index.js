@@ -12,9 +12,19 @@ import './css/general.css';
 import './css/layout.css';
 
 // TODO only temporray, remove later
+//
 import evaluate from "./engine/evaluate";
-const results = evaluate(exampleState.getIn(["pictures", "example"]));
-const state = exampleState.setIn(["pictures", "example", "__results"], results);
+import { buildPictureSpec } from "./engine/draw";
+
+const pictureName = "example";
+const pictures = exampleState.get("pictures");
+const results = evaluate(pictures.get(pictureName));
+const preview = buildPictureSpec(pictures, pictureName, results.variables);
+const state = exampleState
+  .setIn(["pictures", pictureName, "__results"], results)
+  .setIn(["pictures", pictureName, "__preview"], preview);
+
+// END OF remove later
 
 const store = createStore(rootReducer, state);
 

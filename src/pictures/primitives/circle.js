@@ -5,12 +5,13 @@ import createPrimitive from "../../utils/create-primitive";
 const variables = {
   cx: 0,
   cy: 0,
-  r: 10
+  r: 10,
+  fill: "'red'"
 };
 
-function draw({ cx, cy, r }) {
+function draw(params, key=0) {
   return (
-    <circle cx={cx} cy={cy} r={r} />
+    <circle key={key} {...params} />
   )
 }
 

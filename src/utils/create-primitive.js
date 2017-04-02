@@ -1,4 +1,3 @@
-import React from "react";
 import _ from "lodash";
 import { fromJS, Map } from "immutable";
 
@@ -13,13 +12,7 @@ function blank() {
   return fromJS(defaults);
 }
 
-function remapProps(props, propsMap) {
-  return _.mapKeys(props, (value, prop) => {
-    return _.has(propsMap, prop) ? propsMap[prop] : prop;
-  });
-}
-
-export default function(elementName, variables, propMap={}) {
+export default function({ variables, draw }) {
 
   let picture = blank();
 
@@ -32,11 +25,8 @@ export default function(elementName, variables, propMap={}) {
                      .setIn(["graph", name], node);
   });
 
-  const draw = (props) => {
-    return React.createElement(elementName, remapProps(props, propMap));
+  return {
+    picture,
+    draw
   };
-
-  picture = picture.set("draw", draw);
-
-  return picture;
 }
