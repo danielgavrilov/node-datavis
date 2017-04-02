@@ -1,7 +1,6 @@
-import { isString } from "lodash";
-import { fromJS, Iterable } from "immutable";
+import { stateFromJS } from "./utils/state";
 
-export default fromJS({
+export default stateFromJS({
 
   editor: {
 
@@ -176,10 +175,4 @@ export default fromJS({
     }
   },
 
-}, function(key, value) {
-  if (isString(key) && key.indexOf("__") === 0) {
-    return value.toJS();
-  } else {
-    return Iterable.isKeyed(value) ? value.toMap() : value.toList();
-  }
 });
