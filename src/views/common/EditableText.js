@@ -62,7 +62,11 @@ class EditableText extends Component {
   }
 
   _onKeyDown(e) {
-    if (e.keyCode === 13) { // Enter
+    const { noNewlines, noSpaces } = this.props;
+    if (
+      (noNewlines && e.keyCode === 13) ||  // Enter
+      (noSpaces && e.keyCode === 32)       // Space
+    ) {
       e.preventDefault();
     }
   }
