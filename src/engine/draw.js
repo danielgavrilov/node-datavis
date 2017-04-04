@@ -37,24 +37,24 @@ export function buildPictureSpec(pictures, pictureName, params={}) {
 
     const subpicture = picture.getIn(["subpictures", subpictureId]);
     const override = subpicture.get("override").toJS();
-    const subpictureName = subpicture.get("picture");
+    const pictureId = subpicture.get("picture");
     const scopeName = subpicture.get("scope");
     const scopes = getScopes(params, scopeName);
     const paramsCollection = parameters(override, params, scopes);
     const children = paramsCollection.map((params) => {
-      if (isPrimitive(subpictureName)) {
-        const primitivePicture = primitives[subpictureName].picture;
+      if (isPrimitive(pictureId)) {
+        const primitivePicture = primitives[pictureId].picture;
         const { variables } = evaluate(primitivePicture, params);
         const combinedParams = _.assign({}, params, variables);
         return {
-          type: subpictureName,
+          type: pictureId,
           params: combinedParams
         };
-      } else if (pictures.has(subpictureName)) {
-        const picture = pictures.get(subpictureName);
+      } else if (pictures.has(pictureId)) {
+        const picture = pictures.get(pictureId);
         const { variables } = evaluate(picture, params);
         const combinedParams = _.assign({}, params, variables);
-        return buildPictureSpec(pictures, subpictureName, combinedParams);
+        return buildPictureSpec(pictures, pictureId, combinedParams);
       } else {
         throw new InexistingPicture({ name: subpictureName });
       }
