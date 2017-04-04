@@ -6,50 +6,72 @@
   flex-direction: column;
 }
 
-.variables-pane-title {
-  font-size: 1.3em;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-align: center;
-  text-shadow: 0 1px 0 rgba(255,255,255,.2);
-  background: linear-gradient(white, #f1f1f1);
-  border-bottom: 1px solid #bbb;
-  padding: .35em;
-  flex: 0;
-}
-
-.variables-list {
+.variables-container {
   flex: 1;
   overflow-y: scroll;
-  padding: .5em;
 }
 
-.variables-item {
+.variables-category {
+  margin-bottom: 1.5em;
+}
+
+.variables-category h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 0.5px;
+  margin: .7em .5em .5em;
+}
+
+.variable-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   font-size: 1.4em;
-  margin-bottom: .35em;
+  margin-top: -1px;
 }
 
-.variables-item-label-container {
-  flex: 1;
-}
-
-.variables-item-expression-container {
-  flex: 1;
-  margin-left: 10px;
-}
-
-.variables-item-label {
+.variable-name {
+  flex: 0 0 5em;
+  max-width: 50%;
   display: inline-block;
-  background-color: #0488b9;
-  padding: .2em .5em;
+  background: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,0)), #0488b9;
+  padding: .3em .55em;
   color: white;
-  border: 1px solid #05749d;
-  border-radius: 1em;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
+  position: relative;
 }
 
-.variables-item-expression input {
+.variable-name:hover {
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.4);
+}
+
+.variable-name.category--required {
+  background: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,0)), #03a200;
+}
+
+.variable-name.category--sources {
+  background: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,0)), #d08f00;
+}
+
+/* content editable div */
+.variable-name div {
+  text-shadow: none;
+  outline: none;
+  border: none;
+}
+
+.variable-value {
+  flex: 1;
+  margin-left: .75em;
+  align-self: center;
+}
+
+.variable-value li {
+  background-color: transparent !important;
+}
+
+.variable-value input {
   font-family: "Source Code Pro";
   font-weight: 400;
   color: #3257b4;
@@ -60,5 +82,3 @@
   display: block;
   width: 100%;
 }
-
-.variables-item-label {}

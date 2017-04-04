@@ -41,6 +41,16 @@ export default stateFromJS({
           __ref: "datahashhash"
         }
       },
+      variableCategories: {
+        required: [
+          "width",
+          "height"
+        ],
+        sources: [
+          "data"
+        ],
+        custom: []
+      },
       graph: {
         "var_width": {
           expression: "300",
@@ -56,7 +66,7 @@ export default stateFromJS({
           visible: true,
           properties: {
             x: 10,
-            y: 100
+            y: 50
           }
         },
         "datahashhash": {
@@ -118,7 +128,22 @@ export default stateFromJS({
         },
         "data": {
           __ref: "datahashhash"
+        },
+        "test": {
+          __ref: "var_test"
         }
+      },
+      variableCategories: {
+        required: [
+          "width",
+          "height"
+        ],
+        sources: [
+          "data"
+        ],
+        custom: [
+          "test"
+        ]
       },
       graph: {
         "var_width": {
@@ -155,6 +180,11 @@ export default stateFromJS({
             x: 10,
             y: 10,
           }
+        },
+        "var_test": {
+          name: "test",
+          visible: false,
+          __value: "just testing"
         }
       },
       subpictures: {

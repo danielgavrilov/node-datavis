@@ -1,6 +1,7 @@
 import React from "react";
 
 import PaneHeader from "../common/PaneHeader";
+import VariablesCategories from "./VariablesCategories";
 
 import "../../css/variables-pane.css";
 
@@ -9,8 +10,7 @@ const VariablesPane = () => (
     <PaneHeader>
       Variables
     </PaneHeader>
-    <div className="variables-list">
-    </div>
+    <VariablesCategories />
   </div>
 );
 
