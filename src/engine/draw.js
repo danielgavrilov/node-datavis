@@ -56,7 +56,7 @@ export function buildPictureSpec(pictures, pictureName, params={}) {
         const combinedParams = _.assign({}, params, variables);
         return buildPictureSpec(pictures, pictureId, combinedParams);
       } else {
-        throw new InexistingPicture({ name: subpictureName });
+        throw new InexistingPicture({ pictureId });
       }
     });
 

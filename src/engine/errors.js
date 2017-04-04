@@ -20,9 +20,9 @@ export class UndefinedFunction extends Error {
 }
 
 export class InexistingPicture extends Error {
-  constructor({ name }) {
-    super("Inexisting picture: " + name);
-    this.name = name;
+  constructor({ pictureId }) {
+    super("Inexisting picture: " + pictureId);
+    this.pictureId = pictureId;
   }
 }
 
