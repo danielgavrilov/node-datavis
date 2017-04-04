@@ -29,9 +29,9 @@ export function specToSVG({ type, params, children }, key) {
   }
 }
 
-export function buildPictureSpec(pictures, pictureName, params={}) {
+export function buildPictureSpec(pictures, pictureId, params={}) {
 
-  const picture = pictures.get(pictureName);
+  const picture = pictures.get(pictureId);
 
   const children = picture.get("subpicturesOrder").reverse().map((subpictureId) => {
 
@@ -71,7 +71,7 @@ export function buildPictureSpec(pictures, pictureName, params={}) {
 
   return {
     type: "group",
-    picture: pictureName,
+    picture: pictureId,
     params,
     children
   };
