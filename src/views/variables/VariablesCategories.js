@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import currentPicture from "../../utils/current-picture";
+import { currentPicture } from "../../utils/pictures";
 
 import VariablesList from "./VariablesList";
 

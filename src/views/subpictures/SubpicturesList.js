@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import { selectSubpicture } from "../../actions";
-import currentPicture from "../../utils/current-picture";
+import { currentPicture } from "../../utils/pictures";
 
 import Subpicture from "./Subpicture";
 

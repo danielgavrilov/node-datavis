@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { connect } from 'react-redux';
 
-import currentPicture from "../../utils/current-picture";
+import { currentPicture } from "../../utils/pictures";
 
 import FunctionsList from "./FunctionsList";
 

@@ -3,7 +3,7 @@ import { fromJS } from "immutable";
 import { connect } from 'react-redux';
 
 import computeArcs from "../../engine/arcs";
-import currentPicture from "../../utils/current-picture";
+import { currentPicture } from "../../utils/pictures";
 
 import ArcsAndNodes from "./ArcsAndNodes";
 

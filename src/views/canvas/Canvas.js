@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import { specToSVG } from "../../engine/draw";
-import currentPicture from "../../utils/current-picture";
+import { currentPicture } from "../../utils/pictures";
 
 const Canvas = ({ svg, width, height }) => (
   <div className="canvas-container">
