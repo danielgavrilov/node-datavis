@@ -2,6 +2,8 @@ import React from "react";
 
 import createPrimitive from "../../utils/create-primitive";
 
+const name = "rect";
+
 const variables = {
   x: 0,
   y: 0,
@@ -16,4 +18,4 @@ function draw(params, key) {
   )
 }
 
-export default createPrimitive({ variables, draw });
+export default createPrimitive({ name, variables, draw });

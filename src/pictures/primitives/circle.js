@@ -2,6 +2,8 @@ import React from "react";
 
 import createPrimitive from "../../utils/create-primitive";
 
+const name = "circle";
+
 const variables = {
   cx: 0,
   cy: 0,
@@ -15,4 +17,4 @@ function draw(params, key=0) {
   )
 }
 
-export default createPrimitive({ variables, draw });
+export default createPrimitive({ name, variables, draw });

@@ -2,6 +2,7 @@ import _ from "lodash";
 import { fromJS, Map } from "immutable";
 
 const defaults = {
+  name: "",
   functions: {},
   variables: {},
   graph: {},
@@ -12,9 +13,11 @@ function blank() {
   return fromJS(defaults);
 }
 
-export default function({ variables, draw }) {
+export default function({ name, variables, draw }) {
 
   let picture = blank();
+
+  picture = picture.set("name", name);
 
   _.forEach(variables, (value, name) => {
 
