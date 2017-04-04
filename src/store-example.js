@@ -18,6 +18,10 @@ export default stateFromJS({
         "examplehashhash",
         "examplehashhash2"
       ]
+    },
+
+    subpicturesPane: {
+      selected: null
     }
 
   },

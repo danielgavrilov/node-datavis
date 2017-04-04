@@ -1,12 +1,9 @@
-import { Map } from "immutable";
+import { combineReducers } from 'redux-immutable';
 
-import { SELECT_PICTURE } from "../actions";
+import editor from "./editor";
+import pictures from "./pictures";
 
-export default function(state=Map(), action) {
-  switch (action.type) {
-    case SELECT_PICTURE:
-      return state.setIn(["editor", "pictureId"], action.pictureId);
-    default:
-      return state;
-  }
-}
+export default combineReducers({
+  editor,
+  pictures
+});

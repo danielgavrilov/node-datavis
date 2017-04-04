@@ -2,6 +2,13 @@
   flex: 1;
   border-right: 1px solid #ccc;
   background: #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.subpictures-list {
+  flex: 1;
+  overflow-y: scroll;
 }
 
 .subpicture {
@@ -32,4 +39,8 @@
   border-radius: 1em;
   box-shadow: inset 0 2px 2px rgba(0,0,0,.1),
               0 1px 0 rgba(255,255,255,.1);
+}
+
+.subpicture.selected {
+  background: linear-gradient(#606060, #505050);
 }
