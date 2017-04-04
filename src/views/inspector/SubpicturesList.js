@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
   const picture = currentPicture(state);
   const subpictures = picture.get("subpictures")
   const order = picture.get("subpicturesOrder");
-  const selectedId = state.getIn(["editor", "subpicturesPane", "selected"]);
+  const selectedId = state.getIn(["editor", "inspectorPane", "subpictureId"]);
   return {
     pictures,
     subpictures,

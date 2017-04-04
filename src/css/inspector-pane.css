@@ -1,3 +1,55 @@
 .inspector-pane {
+  flex: 5;
+  border-right: 1px solid #ccc;
+  background: #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.subpictures-container {
   flex: 1;
+  border-right: 1px solid #ccc;
+}
+
+.parameters-container {
+  flex: 2;
+}
+
+.subpictures-list {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.subpicture {
+  font-size: 1.4em;
+  padding: .3em .4em;
+  background: linear-gradient(#888, #777);
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #999;
+  color: white;
+  cursor: pointer;
+}
+
+.subpicture:hover {
+  background: linear-gradient(#808080, #707070);
+}
+
+.subpicture-name {
+  font-weight: bold;
+}
+
+.subpicture-scope {
+  font-size: .9em;
+  padding: 0em .5em;
+  color: rgba(255,255,255,.6);
+  float: right;
+  background-color: rgba(0,0,0,.1);
+  border: 1px solid #666;
+  border-radius: 1em;
+  box-shadow: inset 0 2px 2px rgba(0,0,0,.1),
+              0 1px 0 rgba(255,255,255,.1);
+}
+
+.subpicture.selected {
+  background: #505050;
 }

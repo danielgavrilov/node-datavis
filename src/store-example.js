@@ -20,8 +20,8 @@ export default stateFromJS({
       ]
     },
 
-    subpicturesPane: {
-      selected: null
+    inspectorPane: {
+      subpictureId: null
     }
 
   },

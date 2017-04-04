@@ -9,9 +9,9 @@ export default function(state=Map(), action) {
       return state.setIn(["pictureId"], action.pictureId)
                   .setIn(["computationPane", "selected", "type"], null)
                   .setIn(["computationPane", "selected", "item"], null)
-                  .setIn(["subpicturesPane", "selected"], null)
+                  .setIn(["inspectorPane", "subpictureId"], null)
     case SELECT_SUBPICTURE:
-      return state.setIn(["subpicturesPane", "selected"], action.subpictureId);
+      return state.setIn(["inspectorPane", "subpictureId"], action.subpictureId);
     default:
       return state;
   }

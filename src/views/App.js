@@ -5,7 +5,6 @@ import FunctionsPane from "./functions/FunctionsPane";
 import ComputationPane from "./computation-graph/ComputationPane";
 import CanvasPane from "./canvas/CanvasPane";
 import VariablesPane from "./variables/VariablesPane";
-import SubpicturesPane from "./subpictures/SubpicturesPane";
 import InspectorPane from "./inspector/InspectorPane";
 
 class App extends Component {
@@ -26,7 +25,6 @@ class App extends Component {
 
             <div className="vertical-panes">
               <VariablesPane />
-              <SubpicturesPane />
               <InspectorPane />
             </div>
 
