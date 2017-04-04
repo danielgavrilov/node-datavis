@@ -8,9 +8,12 @@ const variables = {
   x: 0,
   y: 0,
   height: 20,
-  width: 20,
-  fill: "black"
+  width: 20
 };
+
+const order = [
+  "x", "y", "width", "height"
+];
 
 function draw(params, key) {
   return (
@@ -18,4 +21,4 @@ function draw(params, key) {
   )
 }
 
-export default createPrimitive({ name, variables, draw });
+export default createPrimitive({ name, variables, order, draw });

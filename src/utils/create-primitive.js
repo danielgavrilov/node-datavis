@@ -5,15 +5,19 @@ const defaults = {
   name: "",
   functions: {},
   variables: {},
+  variableCategories: {
+    required: []
+  },
   graph: {},
-  draw: () => null
+  subpictures: {},
+  subpicturesOrder: []
 };
 
 function blank() {
   return fromJS(defaults);
 }
 
-export default function({ name, variables, draw }) {
+export default function({ name, variables, order, draw }) {
 
   let picture = blank();
 
@@ -25,7 +29,8 @@ export default function({ name, variables, draw }) {
     const node = Map().set("__value", variables[name]);
 
     picture = picture.setIn(["variables", name], variable)
-                     .setIn(["graph", name], node);
+                     .setIn(["graph", name], node)
+                     .setIn(["variableCategories", "required"], fromJS(order));
   });
 
   return {

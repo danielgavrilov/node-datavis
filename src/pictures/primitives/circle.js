@@ -7,9 +7,12 @@ const name = "circle";
 const variables = {
   cx: 0,
   cy: 0,
-  r: 10,
-  fill: "'red'"
+  r: 10
 };
+
+const order = [
+  "cx", "cy", "r"
+];
 
 function draw(params, key=0) {
   return (
@@ -17,4 +20,4 @@ function draw(params, key=0) {
   )
 }
 
-export default createPrimitive({ name, variables, draw });
+export default createPrimitive({ name, variables, order, draw });
