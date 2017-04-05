@@ -2,7 +2,7 @@ import React from "react";
 
 import PaneHeader from "../common/PaneHeader";
 import SubpicturesList from "./SubpicturesList";
-import ParametersList from "./ParametersList";
+import Inspector from "./Inspector";
 
 import "../../css/inspector-pane.css";
 
@@ -16,7 +16,7 @@ const InspectorPane = () => (
         <SubpicturesList />
       </div>
       <div className="parameters-container">
-        <ParametersList />
+        <Inspector />
       </div>
     </div>
   </div>

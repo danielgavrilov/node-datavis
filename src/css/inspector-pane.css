@@ -6,13 +6,14 @@
   flex-direction: column;
 }
 
+/* =============================================================================
+   SUBPICTURES
+ */
+
 .subpictures-container {
   flex: 1;
+  display: flex;
   border-right: 1px solid #ccc;
-}
-
-.parameters-container {
-  flex: 2;
 }
 
 .subpictures-list {
@@ -52,4 +53,68 @@
 
 .subpicture.selected {
   background: #505050;
+}
+
+/* =============================================================================
+   PARAMETERS
+ */
+
+.parameters-container {
+  flex: 2;
+  display: flex;
+  background-color: white;
+}
+
+.parameters-content {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.parameter-container {
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.4em;
+}
+
+.parameter-container div {
+  outline: none;
+}
+
+.parameter-name {
+  flex: 1;
+  padding: .5em .75em;
+  font-weight: bold;
+  color: #555;
+}
+
+.parameter-value {
+  flex: 3;
+  padding: .5em;
+  color: steelblue;
+}
+
+.parameter-name .placeholder,
+.parameter-value .placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.scope-container {
+  flex: 0;
+  display: flex;
+  padding: .75em;
+  font-size: 1.4em;
+  border-bottom: 1px solid #ccc;
+  background-color: #eee;
+}
+
+.scope-label {
+  flex: 0;
+  padding-right: .75em;
+  font-weight: bold;
+}
+
+.scope-value {
+  color: steelblue;
 }

@@ -1,42 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
-import { List } from "immutable";
 
-import { getPicture, currentPicture } from "../../utils/pictures";
+import Parameter from "./Parameter";
 
-const ParametersList = ({ empty, variableNames }) => {
+const ParametersList = ({ empty, parameters }) => {
   if (empty) {
     return null;
   }
+  const parameterElems = parameters.map((value, name) => (
+    <Parameter key={name} name={name} value={value} />
+  )).toList();
   return (
-    <div>{variableNames.join(",")}</div>
+    <div className="parameters-list">
+      {parameterElems}
+    </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  const subpictureId = state.getIn(["editor", "inspectorPane", "subpictureId"]);
-  if (subpictureId == null) {
-    return { empty: true };
-  }
-  const subpicture = currentPicture(state).getIn(["subpictures", subpictureId]);
-  const pictureId = subpicture.get("picture");
-  const picture = getPicture(state, pictureId);
-  const variableCategories = picture.get("variableCategories");
-  let variableNames = List();
-  ["required", "sources", "custom"].forEach((category) => {
-    variableNames = variableNames.concat(variableCategories.get(category));
-  });
-  return {
-    empty: false,
-    variableNames
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ParametersList);
+export default ParametersList;
