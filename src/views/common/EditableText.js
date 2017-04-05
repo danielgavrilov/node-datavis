@@ -28,8 +28,8 @@ class EditableText extends Component {
   componentDidMount() {
     this._refresh();
     // Autofocus if empty string value
-    const { value } = this.props
-    if (value === "" || !value) {
+    const { autofocus } = this.props;
+    if (autofocus) {
       findDOMNode(this).focus();
     }
   }
