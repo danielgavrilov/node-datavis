@@ -8,10 +8,13 @@ const Variable = ({ name, category, variable, value }) => {
   return (
     <div className="variable-container">
       <div className={"variable-name category--" + category}>
-        <EditableText value={name}
-                      setValue={() => null}
-                      noNewlines={true}
-                      noSpaces={true} />
+        { category === "required" ?
+          <div>{name}</div> :
+          <EditableText value={name}
+                        setValue={() => null}
+                        noNewlines={true}
+                        noSpaces={true} />
+        }
       </div>
       <div className="variable-value">
         <ObjectInspector data={value} />
