@@ -6,7 +6,9 @@ const defaults = {
   functions: {},
   variables: {},
   variableCategories: {
-    required: []
+    required: [],
+    sources: [],
+    custom: []
   },
   graph: {},
   subpictures: {},
