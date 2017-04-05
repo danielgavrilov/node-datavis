@@ -7,7 +7,9 @@ export default function parameters(override, variables, scopes=[]) {
     scopes = [{}];
   }
   return scopes.map((scope) => {
-    return _.mapValues(override, (expression) => {
+    // omit keys that have value of empty string
+    const filteredOverride = _.omitBy(override, (value) => value === "");
+    return _.mapValues(filteredOverride, (expression) => {
       return evaluate(expression, scope, variables);
     })
   });
