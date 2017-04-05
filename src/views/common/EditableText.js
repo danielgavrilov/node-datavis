@@ -16,12 +16,14 @@ class EditableText extends Component {
   render() {
     const { value } = this.props;
     return (
-      <div contentEditable="true"
+      <div className="editable"
+           contentEditable="true"
            onInput={this._onInput.bind(this)}
            onKeyDown={this._onKeyDown.bind(this)}
            onFocus={this._onFocus.bind(this)}
            onBlur={this._onBlur.bind(this)}
-           value={value} />
+           value={value}>
+      </div>
     )
   }
 
@@ -40,7 +42,7 @@ class EditableText extends Component {
 
   _refresh() {
     const el = findDOMNode(this);
-    const { value } = this.props
+    const { value } = this.props;
     if (el.textContent !== value) {
       el.textContent = value;
     }
@@ -54,11 +56,11 @@ class EditableText extends Component {
   }
 
   _onFocus() {
-    findDOMNode(this).classList.add("focus")
+    findDOMNode(this).classList.add("focus");
   }
 
   _onBlur() {
-    findDOMNode(this).classList.remove("focus")
+    findDOMNode(this).classList.remove("focus");
   }
 
   _onKeyDown(e) {
