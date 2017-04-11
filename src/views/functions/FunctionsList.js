@@ -4,7 +4,7 @@ import Function from "./Function";
 
 const FunctionsList = ({ functions, onFunctionClick }) => {
   const children = functions.map((fn, id) => (
-    <Function key={id} name={id} onClick={() => onFunctionClick(id)} />
+    <Function key={id} name={fn.get("name")} onClick={() => onFunctionClick(id)} />
   )).toList().toJS();
   return (
     <div className="functions-list">
