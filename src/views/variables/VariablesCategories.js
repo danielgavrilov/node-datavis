@@ -2,10 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { currentPicture } from "../../utils/pictures";
+import { renameVariable, changeVariable } from "../../actions";
 
 import VariablesList from "./VariablesList";
 
-const VariablesCategories = ({ variables, variableValues, categories }) => {
+const VariablesCategories = ({
+  variables,
+  variableValues,
+  categories,
+  onNameChange,
+  onValueChange
+}) => {
   const lists = categories.map((variableNames, categoryName) => {
     return (
       <VariablesList key={categoryName}
@@ -13,7 +20,9 @@ const VariablesCategories = ({ variables, variableValues, categories }) => {
                      categoryName={categoryName}
                      variables={variables}
                      variableValues={variableValues}
-                     variableNames={variableNames} />
+                     variableNames={variableNames}
+                     onNameChange={onNameChange}
+                     onValueChange={onValueChange} />
     )
   }).toList();
   return (
@@ -26,9 +35,11 @@ const VariablesCategories = ({ variables, variableValues, categories }) => {
 const mapStateToProps = (state) => {
   const picture = currentPicture(state);
   const graph = picture.get("graph");
-  const variables = picture.get("variables").map((variable) => {
+  const variables = picture.get("variables").map((variable, name) => {
+    if (!variable) debugger;
     const __ref = variable.get("__ref");
-    return graph.get(__ref);
+    const node = graph.get(__ref);
+    return node;
   });
   const variableValues = picture.get("__results").variables;
   const categories = picture.get("variableCategories");
@@ -39,6 +50,18 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch, getState) => {
+  return {
+    onNameChange: (oldName, newName) => {
+      return dispatch(renameVariable(oldName, newName));
+    },
+    onValueChange: (name, value, valueType) => {
+      return dispatch(changeVariable(name, value, valueType));
+    }
+  }
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(VariablesCategories)

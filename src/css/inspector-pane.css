@@ -118,3 +118,7 @@
 .scope-value {
   color: steelblue;
 }
+
+.scope-name {
+  flex: 1;
+}

@@ -3,8 +3,16 @@ import { has } from "lodash";
 import { InexistingPicture } from "../engine/errors";
 import primitives from "../pictures/primitives";
 
+export function currentPictureId(state) {
+  return state.getIn(["editor", "pictureId"])
+}
+
+export function currentSubpictureId(state) {
+  return state.getIn(["editor", "inspectorPane", "subpictureId"])
+}
+
 export function currentPicture(state) {
-  const pictureId = state.getIn(["editor", "pictureId"]);
+  const pictureId = currentPictureId(state);
   return state.getIn(["pictures", pictureId]);
 }
 

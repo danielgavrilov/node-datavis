@@ -2,21 +2,26 @@ import React from "react";
 
 import EditableText from "../common/EditableText";
 
-const Parameter = ({ name, value }) => (
+const Parameter = ({
+  name,
+  value,
+  onNameChange,
+  onValueChange
+}) => (
   <div className="parameter-container">
     <div className="parameter-name">
       <EditableText value={name}
                     noNewlines={true}
                     noSpaces={true}
                     placeholder="parameter"
-                    setValue={() => null}/>
+                    onChangeEnd={(newName) => onNameChange(name, newName)} />
     </div>
     <div className="parameter-value">
       <EditableText value={value}
-                    noNewlines={true}
-                    noSpaces={true}
+                    noNewlines={false}
+                    noSpaces={false}
                     placeholder="value"
-                    setValue={() => null} />
+                    onChange={(value) => onValueChange(name, value)} />
     </div>
   </div>
 );

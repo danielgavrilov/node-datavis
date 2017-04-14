@@ -2,7 +2,7 @@ import React from "react";
 
 import EditableText from "../common/EditableText";
 
-const Scope = ({ scope }) => (
+const Scope = ({ scope, onScopeChange }) => (
   <div className="scope-container">
     <div className="scope-label">
       Scope
@@ -12,7 +12,7 @@ const Scope = ({ scope }) => (
                     noNewlines={true}
                     noSpaces={true}
                     placeholder="Global"
-                    setValue={() => null} />
+                    onChange={onScopeChange} />
     </div>
   </div>
 );

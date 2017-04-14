@@ -28,22 +28,29 @@
   display: flex;
   align-items: flex-start;
   font-size: 1.4em;
-  margin-top: -1px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.variable-name-container {
+  flex: 0 0 5em;
+  max-width: 50%;
+  padding: .2em;
 }
 
 .variable-name {
-  flex: 0 0 5em;
-  max-width: 50%;
   display: inline-block;
   background: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,0)), #0488b9;
-  padding: .3em .55em;
+  padding: .3125em .55em;
   color: white;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.2);
   position: relative;
+  border-radius: 2em;
+  text-shadow: 0 1px 0 rgba(0,0,0,.3);
 }
 
 .variable-name:hover {
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.4);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.3);
 }
 
 .variable-name.category--required {
@@ -54,17 +61,15 @@
   background: linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,0)), #d08f00;
 }
 
-/* content editable div */
-.variable-name div {
-  text-shadow: none;
+.variable-name.editable {
   outline: none;
-  border: none;
 }
 
 .variable-value {
   flex: 1;
   margin-left: .75em;
   align-self: center;
+  padding: .2em;
 }
 
 .variable-value li {

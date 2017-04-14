@@ -7,16 +7,24 @@ import { findDOMNode } from "react-dom";
   https://github.com/cdglabs/apparatus/blob/master/src/View/Generic/EditableText.coffee
  */
 
+const noop = () => null;
+
 class EditableText extends Component {
+
+  static defaultProps = {
+    className: "",
+    onChange: noop,
+    onChangeEnd: noop
+  }
 
   shouldComponentUpdate(nextProps) {
     return this._isDirty || nextProps.value !== this.props.value
   }
 
   render() {
-    const { value } = this.props;
+    const { value, className } = this.props;
     return (
-      <div className="editable"
+      <div className={"editable " + className}
            contentEditable="true"
            onInput={this._onInput.bind(this)}
            onKeyDown={this._onKeyDown.bind(this)}
@@ -29,7 +37,6 @@ class EditableText extends Component {
 
   componentDidMount() {
     this._refresh();
-    // Autofocus if empty string value
     const { autofocus } = this.props;
     if (autofocus) {
       findDOMNode(this).focus();
@@ -49,10 +56,13 @@ class EditableText extends Component {
     this._isDirty = false;
   }
 
+  _getContent() {
+    return findDOMNode(this).textContent;
+  }
+
   _onInput() {
     this._isDirty = true;
-    const el = findDOMNode(this);
-    this.props.setValue(el.textContent);
+    this.props.onChange(this._getContent());
   }
 
   _onFocus() {
@@ -61,6 +71,7 @@ class EditableText extends Component {
 
   _onBlur() {
     findDOMNode(this).classList.remove("focus");
+    this.props.onChangeEnd(this._getContent());
   }
 
   _onKeyDown(e) {

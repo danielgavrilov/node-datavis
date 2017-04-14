@@ -2,7 +2,15 @@ import React from "react";
 
 import Variable from "./Variable";
 
-const VariablesList = ({ title, categoryName, variables, variableNames, variableValues }) => {
+const VariablesList = ({
+  title,
+  categoryName,
+  variables,
+  variableNames,
+  variableValues,
+  onNameChange,
+  onValueChange
+}) => {
   if (variableNames.count() === 0) return null;
   const variableElems = variableNames.map((variableName) => {
     const variable = variables.get(variableName);
@@ -12,7 +20,9 @@ const VariablesList = ({ title, categoryName, variables, variableNames, variable
                 name={variableName}
                 category={categoryName}
                 variable={variable}
-                value={value} />
+                value={value}
+                onNameChange={onNameChange}
+                onValueChange={onValueChange} />
     );
   });
   return (

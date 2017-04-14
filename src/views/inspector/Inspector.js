@@ -3,15 +3,30 @@ import { connect } from "react-redux";
 import { List, Map } from "immutable";
 
 import { getPicture, currentPicture } from "../../utils/pictures";
+import {
+  renameParameter,
+  changeParameter,
+  changeScope
+} from "../../actions";
 
 import Scope from "./Scope";
 import ParametersList from "./ParametersList";
 
-const Inspector = ({ empty, parameters, scope }) => {
+const Inspector = ({
+  empty,
+  parameters,
+  scope,
+  onNameChange,
+  onValueChange,
+  onScopeChange
+}) => {
   return empty ? null : (
     <div className="parameters-content">
-      <Scope scope={scope} />
-      <ParametersList parameters={parameters} />
+      <Scope scope={scope}
+             onScopeChange={onScopeChange} />
+      <ParametersList parameters={parameters}
+                      onNameChange={onNameChange}
+                      onValueChange={onValueChange} />
     </div>
   );
 };
@@ -42,7 +57,17 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onNameChange: (oldName, newName) => {
+      return dispatch(renameParameter(oldName, newName));
+    },
+    onValueChange: (name, value, valueType) => {
+      return dispatch(changeParameter(name, value));
+    },
+    onScopeChange: (newScope) => {
+      return dispatch(changeScope(newScope));
+    }
+  };
 }
 
 export default connect(
