@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
   font-size: 62.5%;
+  cursor: default;
 }
 
 /* https://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
@@ -11,4 +12,8 @@ html {
 }
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+.editable {
+  cursor: text;
 }
