@@ -48,6 +48,7 @@ export function buildPictureSpec(pictures, pictureId, params={}) {
         const combinedParams = _.assign({}, params, variables);
         return {
           type: pictureId,
+          picture: pictureId,
           params: combinedParams
         };
       } else if (pictures.has(pictureId)) {
@@ -62,6 +63,7 @@ export function buildPictureSpec(pictures, pictureId, params={}) {
 
     return {
       type: "group",
+      picture: pictureId,
       subpicture: subpictureId,
       params: {},
       children
