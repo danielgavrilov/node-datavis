@@ -19,15 +19,13 @@ class App extends Component {
 
         <div className="horizontal-panes">
 
-          <FunctionsPane />
-          <ComputationPane />
+          <VariablesPane />
 
           <div className="drawing-pane">
 
             <CanvasPane />
 
             <div className="vertical-panes">
-              <VariablesPane />
               <InspectorPane />
             </div>
 

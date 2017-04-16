@@ -1,5 +1,6 @@
 .inspector-pane {
-  flex: 5;
+  flex: 6;
+  min-width: 20em;
   border-right: 1px solid #ccc;
   background: #eee;
   display: flex;
@@ -12,6 +13,8 @@
 
 .subpictures-container {
   flex: 1;
+  min-width: 12em;
+  max-width: 25em;
   display: flex;
   border-right: 1px solid #ccc;
 }

@@ -23,7 +23,7 @@
 }
 
 .drawing-pane {
-  flex: 2;
+  flex: 4;
   display: flex;
   flex-direction: column;
 }
