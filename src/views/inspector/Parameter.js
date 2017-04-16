@@ -9,13 +9,12 @@ const Parameter = ({
   onValueChange
 }) => (
   <div className="parameter-container">
-    <div className="parameter-name">
-      <EditableText value={name}
-                    noNewlines={true}
-                    noSpaces={true}
-                    placeholder="parameter"
-                    onChangeEnd={(newName) => onNameChange(name, newName)} />
-    </div>
+    <EditableText className="parameter-name"
+                  value={name}
+                  noNewlines={true}
+                  noSpaces={true}
+                  placeholder="parameter"
+                  onChangeEnd={(newName) => onNameChange(name, newName)} />
     <div className="parameter-value">
       <EditableText value={value}
                     noNewlines={false}
