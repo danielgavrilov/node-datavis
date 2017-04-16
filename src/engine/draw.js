@@ -96,5 +96,21 @@ function getScopes(variables, scopeName) {
     });
   }
 
-  return scopes;
+  if (_.isPlainObject(scopes[0])) {
+    // assign an index to each plain object
+    return scopes.map((props, index) => {
+      return Object.assign({}, props, { index });
+    });
+  } else {
+    // to make a variable available to use in an expression
+    // it needs to be a property of an object
+    return scopes.map((value, index) => {
+      return {
+        index,
+        value
+      };
+    });
+  }
+
+
 }
