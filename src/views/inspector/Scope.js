@@ -11,7 +11,6 @@ const Scope = ({ scope, onScopeChange }) => (
       <EditableText value={scope}
                     noNewlines={true}
                     noSpaces={true}
-                    placeholder="Global"
                     onChange={onScopeChange} />
     </div>
   </div>

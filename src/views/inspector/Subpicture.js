@@ -4,7 +4,7 @@ const Subpicture = ({ name, scope, selected, onClick }) => {
   const className = "subpicture" + (selected ? " selected" : "");
   return (
     <div className={className} onClick={onClick}>
-      <div className="subpicture-scope">{scope}</div>
+      { scope ? <div className="subpicture-scope">{scope}</div> : null }
       <div className="subpicture-name">{name}</div>
     </div>
   )

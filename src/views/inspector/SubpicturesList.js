@@ -11,7 +11,7 @@ const SubpicturesList = ({ pictures, subpictures, order, selectedId, onSubpictur
     const subpicture = subpictures.get(subpictureId);
     const pictureId = subpicture.get("picture");
     const pictureName = pictures.getIn([pictureId, "name"]) || pictureId;
-    const scope = subpicture.get("scope") || "Global";
+    const scope = subpicture.get("scope");
     return (
       <Subpicture key={subpictureId}
                   name={pictureName}
