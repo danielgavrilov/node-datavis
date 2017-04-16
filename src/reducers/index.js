@@ -31,6 +31,17 @@ const renameInList = (list, oldValue, newValue) => {
   });
 }
 
+const selectPicture = (editor, { pictureId }) => {
+  return editor.setIn(["pictureId"], pictureId)
+               .setIn(["computationPane", "selected", "type"], null)
+               .setIn(["computationPane", "selected", "item"], null)
+               .setIn(["inspectorPane", "subpictureId"], null);
+}
+
+const selectSubpicture = (editor, { subpictureId }) => {
+  return editor.setIn(["inspectorPane", "subpictureId"], subpictureId);
+}
+
 const renameVariable = (picture, { oldName, newName }) => {
   return picture.withMutations((picture) => {
 
@@ -40,7 +51,6 @@ const renameVariable = (picture, { oldName, newName }) => {
 
     // rename key in "picture.variables"
     renameKey(picture, ["variables", oldName], ["variables", newName]);
-    console.log(picture.toJS());
 
     // rename in categories array
     picture.getIn(["variableCategories"]).forEach((variableNames, categoryName) => {
@@ -57,26 +67,13 @@ const renameParameter = (subpicture, { oldName, newName }) => {
   return subpicture;
 }
 
-const changeParameter = (state, pictureId, subpictureId, name, value) => {
-  return state.setIn([
-    "pictures",
-    pictureId,
-    "subpictures",
-    subpictureId,
-    "override",
-    name
-  ], value);
+const changeParameter = (subpicture, { name, value }) => {
+  return subpicture.setIn(["override", name], value);
 }
 
-const changeScope = (state, pictureId, subpictureId, newScope) => {
+const changeScope = (subpicture, { newScope }) => {
   const scope = newScope !== "" ? newScope : null;
-  return state.setIn([
-    "pictures",
-    pictureId,
-    "subpictures",
-    subpictureId,
-    "scope"
-  ], scope);
+  return subpicture.setIn(["scope"], scope);
 }
 
 function evalPicture(state, pictureId) {
@@ -100,52 +97,68 @@ function evalPicture(state, pictureId) {
 export default function(state=Map(), action) {
   const pictureId = currentPictureId(state);
   const subpictureId = currentSubpictureId(state);
-  let newState;
   switch (action.type) {
 
     case SELECT_PICTURE:
-      newState = state.setIn(["editor", "pictureId"], action.pictureId)
-                      .setIn(["editor", "computationPane", "selected", "type"], null)
-                      .setIn(["editor", "computationPane", "selected", "item"], null)
-                      .setIn(["editor", "inspectorPane", "subpictureId"], null)
-      return evalPicture(newState, action.pictureId);
+      state = reducePath(
+        state,
+        ["editor"],
+        selectPicture,
+        action
+      );
+      return evalPicture(state, action.pictureId);
 
     case SELECT_SUBPICTURE:
-      return state.setIn(["editor", "inspectorPane", "subpictureId"], action.subpictureId);
+      return reducePath(
+        state,
+        ["editor"],
+        selectSubpicture,
+        action
+      );
 
     case RENAME_VARIABLE:
       if (action.newName !== action.oldName) {
-        newState = reducePath(
+        state = reducePath(
           state,
           ["pictures", pictureId],
           renameVariable,
           action
         );
-        newState = evalPicture(newState, pictureId);
-        return newState;
+        state = evalPicture(state, pictureId);
+        return state;
       } else {
         return state;
       }
 
     case RENAME_PARAMETER:
-      newState = reducePath(
+      state = reducePath(
         state,
         ["pictures", pictureId, "subpictures", subpictureId],
         renameParameter,
         action
       );
-      newState = evalPicture(newState, pictureId);
-      return newState;
+      state = evalPicture(state, pictureId);
+      return state;
 
     case CHANGE_PARAMETER:
-      newState = changeParameter(state, pictureId, subpictureId, action.name, action.value);
-      newState = evalPicture(newState, pictureId);
-      return newState;
+      state = reducePath(
+        state,
+        ["pictures", pictureId, "subpictures", subpictureId],
+        changeParameter,
+        action
+      )
+      state = evalPicture(state, pictureId);
+      return state;
 
     case CHANGE_SCOPE:
-      newState = changeScope(state, pictureId, subpictureId, action.newScope);
-      newState = evalPicture(newState, pictureId);
-      return newState;
+      state = reducePath(
+        state,
+        ["pictures", pictureId, "subpictures", subpictureId],
+        changeScope,
+        action
+      )
+      state = evalPicture(state, pictureId);
+      return state;
 
     default:
       return state;
