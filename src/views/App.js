@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Errors from "./errors/Errors.js";
 import PicturesPane from "./pictures/PicturesPane";
 import FunctionsPane from "./functions/FunctionsPane";
 import ComputationPane from "./computation-graph/ComputationPane";
@@ -11,6 +12,8 @@ class App extends Component {
   render() {
     return (
       <div id="root" className="panes">
+
+        <Errors />
 
         <PicturesPane />
 

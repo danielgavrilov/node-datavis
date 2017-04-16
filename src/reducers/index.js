@@ -88,6 +88,7 @@ function evalPicture(state, pictureId) {
     state = state.setIn(["pictures", pictureId, "__preview"], preview);
   } catch(error) {
     errors.push(error);
+  } finally {
     state = state.setIn(["pictures", pictureId, "__errors"], errors);
   }
 
