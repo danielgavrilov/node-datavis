@@ -1,7 +1,13 @@
 import rect from "./rect";
 import circle from "./circle";
+import ellipse from "./ellipse";
+import line from "./line";
+import text from "./text";
 
 export default {
   rect,
-  circle
+  circle,
+  ellipse,
+  line,
+  text
 }

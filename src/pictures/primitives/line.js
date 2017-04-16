@@ -2,21 +2,22 @@ import React from "react";
 
 import createPrimitive from "../../utils/create-primitive";
 
-const name = "circle";
+const name = "line";
 
 const variables = {
-  x: 0,
-  y: 0,
-  r: 10
+  x1: 0,
+  y1: 0,
+  x2: 10,
+  y2: 15
 };
 
 const order = [
-  "x", "y", "r"
+  "x1", "y1", "x2", "y2"
 ];
 
-function draw({ x, y, ...params}, key=0) {
+function draw(params, key=0) {
   return (
-    <circle key={key} cx={x} cy={y} {...params} />
+    <line key={key} {...params} />
   )
 }
 
