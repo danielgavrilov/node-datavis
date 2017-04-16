@@ -9,9 +9,9 @@ const Errors = ({ errors }) => {
   if (!errors || errors.length === 0) {
     return null;
   }
-  const errorElems = errors.map((error) => {
+  const errorElems = errors.map((error, index) => {
     return (
-      <div className="error">{error.message}</div>
+      <div key={index} className="error">{error.message}</div>
     );
   });
   return (
