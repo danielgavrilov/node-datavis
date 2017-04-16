@@ -63,8 +63,7 @@ const renameVariable = (picture, { oldName, newName }) => {
 }
 
 const renameParameter = (subpicture, { oldName, newName }) => {
-  console.log({ oldName, newName });
-  return subpicture;
+  return renameKey(subpicture, ["override", oldName], ["override", newName]);
 }
 
 const changeParameter = (subpicture, { name, value }) => {
@@ -118,20 +117,22 @@ export default function(state=Map(), action) {
       );
 
     case RENAME_VARIABLE:
-      if (action.newName !== action.oldName) {
-        state = reducePath(
-          state,
-          ["pictures", pictureId],
-          renameVariable,
-          action
-        );
-        state = evalPicture(state, pictureId);
-        return state;
-      } else {
+      if (action.newName === action.oldName) {
         return state;
       }
+      state = reducePath(
+        state,
+        ["pictures", pictureId],
+        renameVariable,
+        action
+      );
+      state = evalPicture(state, pictureId);
+      return state;
 
     case RENAME_PARAMETER:
+      if (action.newName === action.oldName) {
+        return state;
+      }
       state = reducePath(
         state,
         ["pictures", pictureId, "subpictures", subpictureId],
