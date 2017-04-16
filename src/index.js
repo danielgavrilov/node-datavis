@@ -12,25 +12,27 @@ import './css/general.css';
 import './css/layout.css';
 
 // TODO only temporray, remove later
-//
+
 import evaluate from "./engine/evaluate";
 import { buildPictureSpec } from "./engine/draw";
 
-function evalPicture(state, pictureName) {
+function evalAllPictures(state) {
   const pictures = state.get("pictures");
-  const results = evaluate(pictures.get(pictureName));
-  const preview = buildPictureSpec(pictures, pictureName, results.variables);
-  return state
-    .setIn(["pictures", pictureName, "__results"], results)
-    .setIn(["pictures", pictureName, "__preview"], preview);
+  pictures.keySeq().forEach((pictureName) => {
+    const results = evaluate(pictures.get(pictureName));
+    const preview = buildPictureSpec(pictures, pictureName, results.variables);
+    state = state
+      .setIn(["pictures", pictureName, "__results"], results)
+      .setIn(["pictures", pictureName, "__preview"], preview);
+  });
+  return state;
 };
 
 let state = exampleState;
-state = evalPicture(state, "examplehashhash");
-state = evalPicture(state, "examplehashhash2");
-
+state = evalAllPictures(state);
 
 // END OF remove later
+
 
 const store = createStore(rootReducer, state);
 
