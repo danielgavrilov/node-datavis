@@ -1,4 +1,11 @@
 import { stateFromJS } from "./utils/state";
+import {
+  SOURCE,
+  FUNCTION,
+  STORE,
+  VARIABLE,
+  VARIABLE_REPRESENTATION
+} from "./engine/node-types";
 
 export default stateFromJS({
 
@@ -42,7 +49,7 @@ export default stateFromJS({
           __ref: "var_height"
         },
         "data": {
-          __ref: "datahashhash"
+          __ref: "var_data"
         }
       },
       variableCategories: {
@@ -57,23 +64,19 @@ export default stateFromJS({
       },
       graph: {
         "var_width": {
+          type: VARIABLE,
+          name: "width",
           expression: "300",
           visible: false
         },
         "var_height": {
+          type: VARIABLE,
+          name: "height",
           expression: "300",
           visible: false
         },
-        "hashhashhash": {
-          name: "test",
-          expression: "width",
-          visible: true,
-          properties: {
-            x: 10,
-            y: 50
-          }
-        },
-        "datahashhash": {
+        "var_data": {
+          type: SOURCE,
           name: "data",
           __value: [{
             x: 30,
@@ -90,7 +93,7 @@ export default stateFromJS({
             x: 10,
             y: 10,
           }
-        }
+        },
       },
       subpictures: {
         "a": {
@@ -104,8 +107,8 @@ export default stateFromJS({
           picture: "circle",
           scope: "data",
           override: {
-            "cx": "x",
-            "cy": "y",
+            "x": "x",
+            "y": "y",
             "fill": "\"blue\""
           }
         }
@@ -151,23 +154,19 @@ export default stateFromJS({
       },
       graph: {
         "var_width": {
+          type: VARIABLE,
+          name: "width",
           expression: "500",
           visible: false
         },
         "var_height": {
+          type: VARIABLE,
+          name: "height",
           expression: "300",
           visible: false
         },
-        "hashhashhash": {
-          name: "test",
-          expression: "width",
-          visible: true,
-          properties: {
-            x: 10,
-            y: 100
-          }
-        },
         "datahashhash": {
+          type: SOURCE,
           name: "data",
           __value: [{
             x: 0,
@@ -188,7 +187,7 @@ export default stateFromJS({
         "var_test": {
           name: "test",
           visible: false,
-          __value: "just testing"
+          expression: "2"
         }
       },
       subpictures: {
@@ -199,10 +198,14 @@ export default stateFromJS({
             "x": "x",
             "y": "y"
           }
+        },
+        "b": {
+          picture: "text",
+          override: {}
         }
       },
       subpicturesOrder: [ // top to bottom
-        "a"
+        "a", "b"
       ],
       results: {},
       preview: {} // pictureSpec
