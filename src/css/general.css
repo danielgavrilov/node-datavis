@@ -16,4 +16,5 @@ html {
 
 .editable {
   cursor: text;
+  outline: none;
 }
