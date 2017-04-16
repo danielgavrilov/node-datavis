@@ -8,7 +8,7 @@ const Parameter = ({
   onNameChange,
   onValueChange
 }) => (
-  <div className="parameter-container">
+  <div className={"parameter-container " + (!value ? "inactive" : "")}>
     <EditableText className="parameter-name"
                   value={name}
                   noNewlines={true}

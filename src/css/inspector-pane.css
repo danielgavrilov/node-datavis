@@ -88,6 +88,11 @@
   color: #555;
 }
 
+.inactive .parameter-name {
+  font-style: italic;
+  color: #bbb;
+}
+
 .parameter-value {
   flex: 3;
   padding: .5em;
