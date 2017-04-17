@@ -1,9 +1,27 @@
+function makeAction(type, ...argNames) {
+  return function(...args) {
+    let action = { type }
+    argNames.forEach((argName, index) => {
+      if (argName === "type") throw new Error("action creator was asked to override type");
+      action[argName] = args[index];
+    })
+    return action
+  }
+}
+
 /*
  * action types
  */
 
 export const SELECT_PICTURE = "SELECT_PICTURE";
+export const ADD_PICTURE = "ADD_PICTURE";
+export const REMOVE_PICTURE = "REMOVE_PICTURE";
+export const RENAME_PICTURE = "RENAME_PICTURE";
+
 export const SELECT_SUBPICTURE = "SELECT_SUBPICTURE";
+export const ADD_SUBPICTURE = "ADD_SUBPICTURE";
+export const REMOVE_SUBPICTURE = "REMOVE_SUBPICTURE";
+export const REORDER_SUBPICTURE = "REORDER_SUBPICTURE";
 
 export const ADD_VARIABLE = "ADD_VARIABLE";
 export const REMOVE_VARIABLE = "REMOVE_VARIABLE";
@@ -14,62 +32,97 @@ export const ADD_PARAMETER = "ADD_PARAMETER";
 export const REMOVE_PARAMETER = "REMOVE_PARAMETER";
 export const RENAME_PARAMETER = "RENAME_PARAMETER";
 export const CHANGE_PARAMETER = "CHANGE_PARAMETER";
+
 export const CHANGE_SCOPE = "CHANGE_SCOPE";
 
 /*
  * action creators
  */
 
-export function selectPicture(pictureId) {
-  return {
-    type: SELECT_PICTURE,
-    pictureId
-  }
-}
+export const selectPicture = makeAction(
+  SELECT_PICTURE,
+  "pictureId"
+);
 
-export function selectSubpicture(subpictureId) {
-  return {
-    type: SELECT_SUBPICTURE,
-    subpictureId
-  }
-}
+export const addPicture = makeAction(
+  ADD_PICTURE
+);
 
-export function renameVariable(oldName, newName) {
-  return {
-    type: RENAME_VARIABLE,
-    oldName,
-    newName
-  }
-}
+export const removePicture = makeAction(
+  REMOVE_PICTURE,
+  "pictureId"
+);
 
-export function changeVariable(name, value, valueType) {
-  return {
-    type: CHANGE_VARIABLE,
-    name,
-    value,
-    valueType
-  }
-}
+export const renamePicture = makeAction(
+  RENAME_PICTURE,
+  "pictureId", "name"
+);
 
-export function renameParameter(oldName, newName) {
-  return {
-    type: RENAME_PARAMETER,
-    oldName,
-    newName
-  }
-}
 
-export function changeParameter(name, value) {
-  return {
-    type: CHANGE_PARAMETER,
-    name,
-    value
-  }
-}
+export const selectSubpicture = makeAction(
+  SELECT_SUBPICTURE,
+  "subpictureId"
+);
 
-export function changeScope(newScope) {
-  return {
-    type: CHANGE_SCOPE,
-    newScope
-  }
-}
+export const addSubpicture = makeAction(
+  ADD_SUBPICTURE,
+  "pictureId"
+);
+
+export const removeSubpicture = makeAction(
+  REMOVE_SUBPICTURE,
+  "subictureId"
+);
+
+export const reorderSubpicture = makeAction(
+  REORDER_SUBPICTURE,
+  "subictureId", "toIndex"
+);
+
+
+export const addVariable = makeAction(
+  ADD_VARIABLE,
+  "name", "value", "valueType"
+);
+
+export const removeVariable = makeAction(
+  REMOVE_VARIABLE,
+  "name"
+);
+
+export const renameVariable = makeAction(
+  RENAME_VARIABLE,
+  "oldName", "newName"
+);
+
+export const changeVariable = makeAction(
+  CHANGE_VARIABLE,
+  "name", "value", "valueType"
+);
+
+
+export const addParameter = makeAction(
+  ADD_PARAMETER,
+  "name", "value"
+);
+
+export const removeParameter = makeAction(
+  REMOVE_PARAMETER,
+  "name"
+);
+
+export const renameParameter = makeAction(
+  RENAME_PARAMETER,
+  "oldName", "newName"
+);
+
+export const changeParameter = makeAction(
+  CHANGE_PARAMETER,
+  "name", "value"
+);
+
+
+export const changeScope = makeAction(
+  CHANGE_SCOPE,
+  "newScope"
+);
