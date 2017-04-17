@@ -19,7 +19,7 @@ function blank() {
   return fromJS(defaults);
 }
 
-export default function({ name, variables, order, draw }) {
+export default function({ name, variables, order, draw, icon }) {
 
   let picture = blank();
 
@@ -37,6 +37,7 @@ export default function({ name, variables, order, draw }) {
 
   return {
     picture,
-    draw
+    draw,
+    icon
   };
 }

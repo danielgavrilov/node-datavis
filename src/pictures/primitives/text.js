@@ -15,7 +15,9 @@ const variables = {
   "font-family": "Arial",
   "font-size": "12px",
   "font-weight": "normal",
-  "fill": "black"
+  "fill": "black",
+  "stroke": "",
+  "strokeWidth": ""
 };
 
 const style = [
@@ -26,7 +28,8 @@ const style = [
 ];
 
 const order = [
-  "x", "y", "dx", "dy", "fill", "text"
+  "x", "y", "dx", "dy", "text",
+  "fill", "stroke", "strokeWidth"
 ].concat(style);
 
 function draw({ text, ...params}, key=0) {
@@ -39,4 +42,17 @@ function draw({ text, ...params}, key=0) {
   )
 }
 
-export default createPrimitive({ name, variables, order, draw });
+const iconSize = 24;
+
+export const icon = (
+  <svg className="icon" width={iconSize} height={iconSize}>
+    <text x="3" y="21" style={{
+      fill: "#666",
+      fontFamily: "\"Times New Roman\", serif",
+      fontWeight: "bold",
+      fontSize: "24px"
+    }}>A</text>
+  </svg>
+);
+
+export default createPrimitive({ name, variables, order, draw, icon });

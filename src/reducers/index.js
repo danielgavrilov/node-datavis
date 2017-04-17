@@ -26,6 +26,7 @@ import {
 
 import evaluate from "../engine/evaluate";
 import createPicture from "../utils/create-picture";
+import createSubpicture from "../utils/create-subpicture";
 import { buildPictureSpec } from "../engine/draw";
 import { currentPictureId, currentSubpictureId } from "../utils/pictures";
 import { generateId } from "../utils/identifiers";
@@ -97,6 +98,17 @@ const removePicture = (state, { pictureId }) => {
 const selectSubpicture = (state, { subpictureId }) => {
   return state.setIn(["editor", "inspectorPane", "subpictureId"], subpictureId);
 }
+
+const addSubpicture = (picture, { pictureId }) => {
+  const id = generateId();
+  picture = picture.setIn(["subpictures", id], createSubpicture({ pictureId }))
+  picture = reducePath(
+    picture,
+    ["subpicturesOrder"],
+    (order) => order.push(id)
+  );
+  return picture;
+};
 
 const removeSubpicture = (picture, { subpictureId }) => {
   picture = picture.deleteIn(["subpictures", subpictureId]);
@@ -176,6 +188,17 @@ export default function(state=Map(), action) {
     case SELECT_PICTURE:
       state = selectPicture(state, action);
       return evalPicture(state, action.pictureId);
+
+    case ADD_SUBPICTURE:
+      state = reducePath(
+        state,
+        ["pictures", pictureId],
+        addSubpicture,
+        action
+      );
+      const newSubpictureId = state.getIn(["pictures", pictureId, "subpicturesOrder"]).last();
+      state = selectSubpicture(state, { subpictureId: newSubpictureId });
+      return evalPicture(state, pictureId);
 
     case REMOVE_SUBPICTURE:
       state = reducePath(

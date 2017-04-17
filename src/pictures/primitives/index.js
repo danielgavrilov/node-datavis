@@ -11,3 +11,11 @@ export default {
   line,
   text
 }
+
+export const names = [
+  "rect",
+  "circle",
+  "ellipse",
+  "line",
+  "text"
+];
