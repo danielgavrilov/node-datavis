@@ -1,12 +1,22 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import { selectSubpicture } from "../../actions";
+import {
+  selectSubpicture,
+  removeSubpicture
+} from "../../actions";
 import { currentPicture } from "../../utils/pictures";
 
 import Subpicture from "./Subpicture";
 
-const SubpicturesList = ({ pictures, subpictures, order, selectedId, onSubpictureClick }) => {
+const SubpicturesList = ({
+  pictures,
+  subpictures,
+  order,
+  selectedId,
+  onSubpictureClick,
+  onSubpictureRemove
+}) => {
   const subpictureElems = order.map((subpictureId) => {
     const subpicture = subpictures.get(subpictureId);
     const pictureId = subpicture.get("picture");
@@ -17,7 +27,11 @@ const SubpicturesList = ({ pictures, subpictures, order, selectedId, onSubpictur
                   name={pictureName}
                   scope={scope}
                   selected={subpictureId === selectedId}
-                  onClick={() => onSubpictureClick(subpictureId)} />
+                  onClick={() => onSubpictureClick(subpictureId)}
+                  onRemove={(event) => {
+                    event.stopPropagation();
+                    onSubpictureRemove(subpictureId);
+                  }} />
     );
   });
   return (
@@ -45,7 +59,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onSubpictureClick: (subpictureId) => {
       return dispatch(selectSubpicture(subpictureId));
-    }
+    },
+    onSubpictureRemove: (subpictureId) => {
+      return dispatch(removeSubpicture(subpictureId));
+    },
   }
 }
 

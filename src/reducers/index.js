@@ -49,6 +49,10 @@ const renameInList = (list, oldValue, newValue) => {
   });
 }
 
+const removeInList = (list, value) => {
+  return list.filter((x) => x !== value);
+}
+
 const selectPicture = (state, { pictureId }) => {
   return state.setIn(["editor", "pictureId"], pictureId)
               .setIn(["editor", "computationPane", "selected", "type"], null)
@@ -70,16 +74,16 @@ const addPicture = (state) => {
   return state;
 }
 
-const removePicture = (state, action) => {
+const removePicture = (state, { pictureId }) => {
   state = reducePath(
     state,
     ["editor", "picturesPane", "picturesOrder"],
-    (picturesOrder) => picturesOrder.filter((id) => id !== action.pictureId)
+    (picturesOrder) => removeInList(picturesOrder, pictureId)
   );
-  state = state.deleteIn(["pictures", action.pictureId]);
+  state = state.deleteIn(["pictures", pictureId]);
   const current = currentPictureId(state);
   // if the selected picture is deleted, then select a random one
-  if (action.pictureId === current) {
+  if (pictureId === current) {
     const pictureId = state.getIn(["editor", "picturesPane", "picturesOrder"]).get(0);
     if (pictureId) {
       state = selectPicture(state, { pictureId });
@@ -92,6 +96,16 @@ const removePicture = (state, action) => {
 
 const selectSubpicture = (state, { subpictureId }) => {
   return state.setIn(["editor", "inspectorPane", "subpictureId"], subpictureId);
+}
+
+const removeSubpicture = (picture, { subpictureId }) => {
+  picture = picture.deleteIn(["subpictures", subpictureId]);
+  picture = reducePath(
+    picture,
+    ["subpicturesOrder"],
+    (order) => removeInList(order, subpictureId)
+  );
+  return picture;
 }
 
 const renameVariable = (picture, { oldName, newName }) => {
@@ -162,6 +176,18 @@ export default function(state=Map(), action) {
     case SELECT_PICTURE:
       state = selectPicture(state, action);
       return evalPicture(state, action.pictureId);
+
+    case REMOVE_SUBPICTURE:
+      state = reducePath(
+        state,
+        ["pictures", pictureId],
+        removeSubpicture,
+        action
+      );
+      if (subpictureId === action.subpictureId) {
+        state = selectSubpicture(state, { subpictureId: null });
+      }
+      return evalPicture(state, pictureId);
 
     case SELECT_SUBPICTURE:
       return selectSubpicture(state, action);

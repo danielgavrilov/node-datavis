@@ -32,6 +32,7 @@
   border-bottom: 1px solid #999;
   color: white;
   cursor: pointer;
+  display: flex;
 }
 
 .subpicture:hover {
@@ -40,18 +41,31 @@
 
 .subpicture-name {
   font-weight: bold;
+  flex: 1;
 }
 
 .subpicture-scope {
+  flex: 0;
   font-size: .9em;
   padding: 0em .5em;
   color: rgba(255,255,255,.6);
-  float: right;
   background-color: rgba(0,0,0,.1);
   border: 1px solid #666;
   border-radius: 1em;
   box-shadow: inset 0 2px 2px rgba(0,0,0,.1),
               0 1px 0 rgba(255,255,255,.1);
+}
+
+.remove-subpicture {
+  flex: 0;
+  color: rgba(0,0,0,.35);
+  margin-left: .35em;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1);
+}
+
+.remove-subpicture:hover {
+  color: white;
+  text-shadow: rgba(0,0,0,.4);
 }
 
 .subpicture.selected {
