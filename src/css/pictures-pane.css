@@ -32,3 +32,19 @@
 .picture svg {
   height: 100%;
 }
+
+.add-picture {
+  align-self: center;
+  font-size: 2em;
+  line-height: 1;
+  color: rgba(0,0,0,.5);
+  padding: .4em .5em .35em;
+  box-shadow: 0 1px 2px 1px rgba(0,0,0,.2);
+  text-align: center;
+  background-color: white;
+  cursor: pointer;
+}
+
+.add-picture:hover {
+  color: #03a2cc;
+}

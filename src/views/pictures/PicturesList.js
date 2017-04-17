@@ -1,10 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import { selectPicture } from "../../actions";
-import Picture from "./Picture";
+import { selectPicture, addPicture } from "../../actions";
 
-const PicturesList = ({ pictures, order, selectedId, onPictureClick }) => {
+import Picture from "./Picture";
+import AddPicture from "./AddPicture";
+
+const PicturesList = ({ pictures, order, selectedId, onPictureClick, onAddPicture }) => {
   const pictureElems = order.map((pictureId) => {
     const picture = pictures.get(pictureId);
     return (
@@ -17,6 +19,7 @@ const PicturesList = ({ pictures, order, selectedId, onPictureClick }) => {
   return (
     <div className="pictures-list">
       {pictureElems}
+      <AddPicture onClick={() => onAddPicture()} />
     </div>
   );
 };
@@ -36,6 +39,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onPictureClick: (pictureId) => {
       return dispatch(selectPicture(pictureId));
+    },
+    onAddPicture: () => {
+      return dispatch(addPicture());
     }
   }
 }
