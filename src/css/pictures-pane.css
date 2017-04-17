@@ -22,6 +22,7 @@
   background-color: white;
   box-shadow: 0 1px 2px 1px rgba(0,0,0,.2);
   cursor: pointer;
+  position: relative;
 }
 
 .picture.selected {
@@ -47,4 +48,26 @@
 
 .add-picture:hover {
   color: #03a2cc;
+}
+
+.picture:hover .remove-picture {
+  opacity: 1;
+}
+
+.remove-picture {
+  position: absolute;
+  font-size: 1.4em;
+  color: rgba(0,0,0,.3);
+  background-color: rgba(0,0,0,.04);
+  top: 0;
+  right: 0;
+  padding: .2em .35em;
+  margin: .15em;
+  opacity: 0;
+  transition: 100ms opacity linear;
+}
+
+.remove-picture:hover {
+  color: white;
+  background-color: #b91111;
 }

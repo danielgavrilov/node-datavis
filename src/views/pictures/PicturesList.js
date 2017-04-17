@@ -1,19 +1,34 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import { selectPicture, addPicture } from "../../actions";
+import {
+  selectPicture,
+  addPicture,
+  removePicture
+} from "../../actions";
 
 import Picture from "./Picture";
 import AddPicture from "./AddPicture";
 
-const PicturesList = ({ pictures, order, selectedId, onPictureClick, onAddPicture }) => {
+const PicturesList = ({
+  pictures,
+  order,
+  selectedId,
+  onPictureClick,
+  onAddPicture,
+  onRemovePicture
+}) => {
   const pictureElems = order.map((pictureId) => {
     const picture = pictures.get(pictureId);
     return (
       <Picture key={pictureId}
                picture={picture}
                selected={pictureId === selectedId}
-               onClick={() => onPictureClick(pictureId)} />
+               onClick={() => onPictureClick(pictureId)}
+               onRemove={(event) => {
+                 event.stopPropagation();
+                 onRemovePicture(pictureId);
+               }} />
     );
   });
   return (
@@ -42,6 +57,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onAddPicture: () => {
       return dispatch(addPicture());
+    },
+    onRemovePicture: (pictureId) => {
+      return dispatch(removePicture(pictureId));
     }
   }
 }

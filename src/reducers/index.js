@@ -70,6 +70,26 @@ const addPicture = (state) => {
   return state;
 }
 
+const removePicture = (state, action) => {
+  state = reducePath(
+    state,
+    ["editor", "picturesPane", "picturesOrder"],
+    (picturesOrder) => picturesOrder.filter((id) => id !== action.pictureId)
+  );
+  state = state.deleteIn(["pictures", action.pictureId]);
+  const current = currentPictureId(state);
+  // if the selected picture is deleted, then select a random one
+  if (action.pictureId === current) {
+    const pictureId = state.getIn(["editor", "picturesPane", "picturesOrder"]).get(0);
+    if (pictureId) {
+      state = selectPicture(state, { pictureId });
+    } else {
+      state = addPicture(state);
+    }
+  }
+  return state;
+}
+
 const selectSubpicture = (state, { subpictureId }) => {
   return state.setIn(["editor", "inspectorPane", "subpictureId"], subpictureId);
 }
@@ -133,8 +153,11 @@ export default function(state=Map(), action) {
 
     case ADD_PICTURE:
       state = addPicture(state);
-      const newPictureId = currentPictureId(state);
-      return evalPicture(state, newPictureId);
+      return evalPicture(state, currentPictureId(state));
+
+    case REMOVE_PICTURE:
+      state = removePicture(state, action);
+      return evalPicture(state, currentPictureId(state));
 
     case SELECT_PICTURE:
       state = selectPicture(state, action);
