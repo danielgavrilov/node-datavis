@@ -7,7 +7,7 @@ export function uniqueName(prefix, immutableMap) {
   let i = 1;
   let name = prefix;
   while (immutableMap.has(name)) {
-    name = name + (i++);
+    name = prefix + (i++);
   }
   return name;
 }
