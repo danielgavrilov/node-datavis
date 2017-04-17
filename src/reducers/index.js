@@ -1,16 +1,34 @@
 import {
+
   SELECT_PICTURE,
+  ADD_PICTURE,
+  REMOVE_PICTURE,
+  RENAME_PICTURE,
+
   SELECT_SUBPICTURE,
+  ADD_SUBPICTURE,
+  REMOVE_SUBPICTURE,
+  REODER_SUBPICTURE,
+
+  ADD_VARIABLE,
+  REMOVE_VARIABLE,
   RENAME_VARIABLE,
   CHANGE_VARIABLE,
+
+  ADD_PARAMETER,
+  REMOVE_PARAMETER,
   RENAME_PARAMETER,
   CHANGE_PARAMETER,
+
   CHANGE_SCOPE
+
 } from "../actions";
 
 import evaluate from "../engine/evaluate";
+import createPicture from "../utils/create-picture";
 import { buildPictureSpec } from "../engine/draw";
 import { currentPictureId, currentSubpictureId } from "../utils/pictures";
+import { generateId } from "../utils/identifiers";
 
 function reducePath(state, path, reducer, ...args) {
   return state.setIn(
@@ -31,15 +49,29 @@ const renameInList = (list, oldValue, newValue) => {
   });
 }
 
-const selectPicture = (editor, { pictureId }) => {
-  return editor.setIn(["pictureId"], pictureId)
-               .setIn(["computationPane", "selected", "type"], null)
-               .setIn(["computationPane", "selected", "item"], null)
-               .setIn(["inspectorPane", "subpictureId"], null);
+const selectPicture = (state, { pictureId }) => {
+  return state.setIn(["editor", "pictureId"], pictureId)
+              .setIn(["editor", "computationPane", "selected", "type"], null)
+              .setIn(["editor", "computationPane", "selected", "item"], null)
+              .setIn(["editor", "inspectorPane", "subpictureId"], null);
 }
 
-const selectSubpicture = (editor, { subpictureId }) => {
-  return editor.setIn(["inspectorPane", "subpictureId"], subpictureId);
+const addPicture = (state) => {
+  const name = "picture";
+  const id = generateId();
+  const newPicture = createPicture({ name });
+  state = state.setIn(["pictures", id], newPicture)
+  state = reducePath(
+    state,
+    ["editor", "picturesPane", "picturesOrder"],
+    (picturesOrder) => picturesOrder.push(id)
+  );
+  state = selectPicture(state, { pictureId: id });
+  return state;
+}
+
+const selectSubpicture = (state, { subpictureId }) => {
+  return state.setIn(["editor", "inspectorPane", "subpictureId"], subpictureId);
 }
 
 const renameVariable = (picture, { oldName, newName }) => {
@@ -99,22 +131,17 @@ export default function(state=Map(), action) {
   const subpictureId = currentSubpictureId(state);
   switch (action.type) {
 
+    case ADD_PICTURE:
+      state = addPicture(state);
+      const newPictureId = currentPictureId(state);
+      return evalPicture(state, newPictureId);
+
     case SELECT_PICTURE:
-      state = reducePath(
-        state,
-        ["editor"],
-        selectPicture,
-        action
-      );
+      state = selectPicture(state, action);
       return evalPicture(state, action.pictureId);
 
     case SELECT_SUBPICTURE:
-      return reducePath(
-        state,
-        ["editor"],
-        selectSubpicture,
-        action
-      );
+      return selectSubpicture(state, action);
 
     case RENAME_VARIABLE:
       if (action.newName === action.oldName) {
