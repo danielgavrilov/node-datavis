@@ -71,7 +71,7 @@ export const addSubpicture = makeAction(
 
 export const removeSubpicture = makeAction(
   REMOVE_SUBPICTURE,
-  "subictureId"
+  "subpictureId"
 );
 
 export const reorderSubpicture = makeAction(
