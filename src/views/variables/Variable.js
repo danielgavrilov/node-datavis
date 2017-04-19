@@ -32,7 +32,7 @@ const Variable = ({
 
 const VariableValue = ({ variable, value, onChange }) => {
   const expression = variable.get("expression");
-  if (expression) {
+  if (expression != null) {
     return (
       <EditableText className={"variable-value expression"}
                     value={expression}
