@@ -50,7 +50,12 @@
   color: #03a2cc;
 }
 
-.picture:hover .remove-picture {
+.show-on-hover {
+  opacity: 0;
+  transition: 100ms opacity linear;
+}
+
+.picture:hover .show-on-hover {
   opacity: 1;
 }
 
@@ -63,11 +68,25 @@
   right: 0;
   padding: .2em .35em;
   margin: .15em;
-  opacity: 0;
-  transition: 100ms opacity linear;
 }
 
 .remove-picture:hover {
   color: white;
   background-color: #b91111;
+}
+
+.embed-picture {
+  position: absolute;
+  font-size: 1.4em;
+  color: rgba(0,0,0,.3);
+  background-color: rgba(0,0,0,.04);
+  bottom: 0;
+  right: 0;
+  padding: .2em .35em;
+  margin: .15em;
+}
+
+.embed-picture:hover {
+  color: white;
+  background-color: #007bc9;
 }

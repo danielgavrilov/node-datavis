@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
   selectPicture,
   addPicture,
-  removePicture
+  removePicture,
+  addSubpicture
 } from "../../actions";
 
 import Picture from "./Picture";
@@ -16,7 +17,8 @@ const PicturesList = ({
   selectedId,
   onPictureClick,
   onAddPicture,
-  onRemovePicture
+  onRemovePicture,
+  onEmbedPicture
 }) => {
   const pictureElems = order.map((pictureId) => {
     const picture = pictures.get(pictureId);
@@ -28,6 +30,10 @@ const PicturesList = ({
                onRemove={(event) => {
                  event.stopPropagation();
                  onRemovePicture(pictureId);
+               }}
+               onEmbed={(event) => {
+                 event.stopPropagation();
+                 onEmbedPicture(pictureId);
                }} />
     );
   });
@@ -60,6 +66,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onRemovePicture: (pictureId) => {
       return dispatch(removePicture(pictureId));
+    },
+    onEmbedPicture: (pictureId) => {
+      return dispatch(addSubpicture(pictureId));
     }
   }
 }
