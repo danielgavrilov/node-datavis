@@ -1,3 +1,5 @@
+import { Map } from "immutable";
+
 import {
 
   SELECT_PICTURE,
@@ -29,7 +31,7 @@ import createPicture from "../utils/create-picture";
 import createSubpicture from "../utils/create-subpicture";
 import { buildPictureSpec } from "../engine/draw";
 import { currentPictureId, currentSubpictureId } from "../utils/pictures";
-import { generateId } from "../utils/identifiers";
+import { generateId, generateName } from "../utils/identifiers";
 
 function reducePath(state, path, reducer, ...args) {
   return state.setIn(
@@ -119,6 +121,26 @@ const removeSubpicture = (picture, { subpictureId }) => {
   );
   return picture;
 }
+
+const addVariable = (picture) => {
+  const name = generateName("variable", picture.get("variables"));
+  const nodeId = generateId();
+  const variable = Map({ __ref: nodeId });
+  const node = Map({
+    type: "VARIABLE",
+    name: name,
+    expression: "",
+    visible: false
+  });
+  picture = picture.setIn(["variables", name], variable);
+  picture = picture.setIn(["graph", nodeId], node);
+  picture = reducePath(
+    picture,
+    ["variableCategories", "custom"],
+    (names) => names.push(name)
+  );
+  return picture;
+};
 
 const renameVariable = (picture, { oldName, newName }) => {
   return picture.withMutations((picture) => {
@@ -223,6 +245,15 @@ export default function(state=Map(), action) {
 
     case SELECT_SUBPICTURE:
       return selectSubpicture(state, action);
+
+    case ADD_VARIABLE:
+      state = reducePath(
+        state,
+        ["pictures", pictureId],
+        addVariable,
+        action
+      );
+      return state;
 
     case RENAME_VARIABLE:
       if (action.newName === action.oldName) {

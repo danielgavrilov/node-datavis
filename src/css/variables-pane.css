@@ -79,3 +79,30 @@
   font-weight: 400;
   color: #3257b4;
 }
+
+.add-variable-container {
+  text-align: center;
+}
+
+.add-variable {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  color: rgba(0,0,0,.3);
+  border: 2px solid rgba(0,0,0,.2);
+  padding: .3em .7em;
+  cursor: pointer;
+  border-radius: 10em;
+  transition: 200ms color linear,
+              200ms border-color linear;
+}
+
+.add-variable:hover {
+  color: #0098c8;
+  border-color: #0098c8;
+}
+
+.add-variable .fa {
+  margin-right: .35em;
+}

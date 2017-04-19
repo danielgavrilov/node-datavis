@@ -2,7 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { currentPicture } from "../../utils/pictures";
-import { renameVariable, changeVariable } from "../../actions";
+
+import {
+  renameVariable, 
+  changeVariable,
+  addVariable
+} from "../../actions";
 
 import VariablesList from "./VariablesList";
 
@@ -11,7 +16,8 @@ const VariablesCategories = ({
   variableValues,
   categories,
   onNameChange,
-  onValueChange
+  onValueChange,
+  onAddVariable
 }) => {
   const lists = categories.map((variableNames, categoryName) => {
     return (
@@ -28,6 +34,12 @@ const VariablesCategories = ({
   return (
     <div className="variables-container">
       {lists}
+      <div className="add-variable-container">
+        <div className="add-variable" onClick={onAddVariable}>
+          <i className="fa fa-plus" />
+          Add variable
+        </div>
+      </div>
     </div>
   );
 }
@@ -57,6 +69,9 @@ const mapDispatchToProps = (dispatch, getState) => {
     },
     onValueChange: (name, value, valueType) => {
       return dispatch(changeVariable(name, value, valueType));
+    },
+    onAddVariable: () => {
+      return dispatch(addVariable());
     }
   }
 };

@@ -3,7 +3,7 @@ export function generateId() {
          Date.now().toString(36);
 }
 
-export function uniqueName(prefix, immutableMap) {
+export function generateName(prefix, immutableMap) {
   let i = 1;
   let name = prefix;
   while (immutableMap.has(name)) {
