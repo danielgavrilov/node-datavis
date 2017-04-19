@@ -144,11 +144,7 @@ const changeVariable = (picture, { name, value, valueType }) => {
   if (valueType === "EXPRESSION") {
     const variable = picture.getIn(["variables", name]);
     const __ref = variable.get("__ref");
-    picture = reducePath(
-      picture,
-      ["graph", __ref],
-      (node) => node.set("expression", value)
-    )
+    picture = picture.setIn(["graph", __ref, "expression"], value);
   }
   return picture;
 };
