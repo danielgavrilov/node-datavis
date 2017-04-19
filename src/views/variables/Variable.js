@@ -9,7 +9,8 @@ const Variable = ({
   variable,
   value,
   onNameChange,
-  onValueChange
+  onValueChange,
+  onRemove
 }) => {
   return (
     <div className="variable-container">
@@ -26,6 +27,13 @@ const Variable = ({
       <VariableValue variable={variable}
                      value={value}
                      onChange={(expression) => onValueChange(name, expression, "EXPRESSION")} />
+      { category !== "required" ? (
+        <div className="remove-variable"
+             title="Remove variable"
+             onClick={() => onRemove(name)}>
+          <i className="fa fa-minus" />
+        </div>
+      ) : null }
     </div>
   );
 };

@@ -9,7 +9,8 @@ const VariablesList = ({
   variableNames,
   variableValues,
   onNameChange,
-  onValueChange
+  onValueChange,
+  onRemoveVariable
 }) => {
   if (variableNames.count() === 0) return null;
   const variableElems = variableNames.map((variableName) => {
@@ -22,7 +23,8 @@ const VariablesList = ({
                 variable={variable}
                 value={value}
                 onNameChange={onNameChange}
-                onValueChange={onValueChange} />
+                onValueChange={onValueChange}
+                onRemove={onRemoveVariable} />
     );
   });
   return (

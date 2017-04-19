@@ -142,6 +142,30 @@ const addVariable = (picture) => {
   return picture;
 };
 
+const removeInListInPath = (map, path, value) => {
+  return reducePath(
+    map,
+    path,
+    (list) => removeInList(list, value)
+  );
+}
+
+const removeVariable = (picture, { name }) => {
+  console.log(name);
+  const variable = picture.getIn(["variables", name]);
+  const __ref = variable.get("__ref");
+  picture = picture.deleteIn(["graph", __ref]);
+  picture = picture.deleteIn(["variables", name]);
+  ["sources", "custom"].forEach((category) => {
+    picture = removeInListInPath(
+      picture,
+      ["variableCategories", category],
+      name
+    );
+  });
+  return picture;
+}
+
 const renameVariable = (picture, { oldName, newName }) => {
   return picture.withMutations((picture) => {
 
@@ -254,6 +278,15 @@ export default function(state=Map(), action) {
         action
       );
       return state;
+
+    case REMOVE_VARIABLE:
+      state = reducePath(
+        state,
+        ["pictures", pictureId],
+        removeVariable,
+        action
+      );
+      return evalPicture(state, pictureId);
 
     case RENAME_VARIABLE:
       if (action.newName === action.oldName) {

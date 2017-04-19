@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { currentPicture } from "../../utils/pictures";
 
 import {
-  renameVariable, 
+  renameVariable,
   changeVariable,
-  addVariable
+  addVariable,
+  removeVariable
 } from "../../actions";
 
 import VariablesList from "./VariablesList";
@@ -17,7 +18,8 @@ const VariablesCategories = ({
   categories,
   onNameChange,
   onValueChange,
-  onAddVariable
+  onAddVariable,
+  onRemoveVariable
 }) => {
   const lists = categories.map((variableNames, categoryName) => {
     return (
@@ -28,7 +30,8 @@ const VariablesCategories = ({
                      variableValues={variableValues}
                      variableNames={variableNames}
                      onNameChange={onNameChange}
-                     onValueChange={onValueChange} />
+                     onValueChange={onValueChange}
+                     onRemoveVariable={onRemoveVariable} />
     )
   }).toList();
   return (
@@ -72,6 +75,9 @@ const mapDispatchToProps = (dispatch, getState) => {
     },
     onAddVariable: () => {
       return dispatch(addVariable());
+    },
+    onRemoveVariable: (name) => {
+      return dispatch(removeVariable(name));
     }
   }
 };

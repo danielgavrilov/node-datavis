@@ -106,3 +106,21 @@
 .add-variable .fa {
   margin-right: .35em;
 }
+
+.remove-variable {
+  flex: 0;
+  font-size: .75em;
+  align-self: center;
+  margin-right: .5em;
+  color: rgba(0,0,0,.2);
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 10em;
+  padding: 0 .15em;
+  cursor: pointer;
+}
+
+.remove-variable:hover {
+  color: white;
+  background-color: #aa2727;
+  border-color: #aa2727;
+}
