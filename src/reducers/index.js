@@ -141,7 +141,6 @@ const renameVariable = (picture, { oldName, newName }) => {
 }
 
 const changeVariable = (picture, { name, value, valueType }) => {
-  console.log(name, value, valueType);
   if (valueType === "EXPRESSION") {
     const variable = picture.getIn(["variables", name]);
     const __ref = variable.get("__ref");
