@@ -2,6 +2,11 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { findDOMNode } from "react-dom";
 
+const KEYBOARD = {
+  ENTER: 13,
+  SPACE: 32
+}
+
 /*
   Adapted from Apparatus:
   https://github.com/cdglabs/apparatus/blob/master/src/View/Generic/EditableText.coffee
@@ -76,10 +81,11 @@ class EditableText extends Component {
 
   _onKeyDown(e) {
     const { noNewlines, noSpaces } = this.props;
-    if (
-      (noNewlines && e.keyCode === 13) ||  // Enter
-      (noSpaces && e.keyCode === 32)       // Space
-    ) {
+    if (noNewlines && e.keyCode === KEYBOARD.ENTER) {
+      findDOMNode(this).blur();
+      window.getSelection().removeAllRanges();
+      e.preventDefault();
+    } else if (noSpaces && e.keyCode === KEYBOARD.SPACE) {
       e.preventDefault();
     }
   }
