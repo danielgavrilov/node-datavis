@@ -151,7 +151,6 @@ const removeInListInPath = (map, path, value) => {
 }
 
 const removeVariable = (picture, { name }) => {
-  console.log(name);
   const variable = picture.getIn(["variables", name]);
   const __ref = variable.get("__ref");
   picture = picture.deleteIn(["graph", __ref]);
