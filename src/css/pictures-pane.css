@@ -44,6 +44,8 @@
   text-align: center;
   background-color: white;
   cursor: pointer;
+  position: relative;
+  z-index: 1000;
 }
 
 .add-picture:hover {
