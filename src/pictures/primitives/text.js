@@ -6,8 +6,8 @@ import createPrimitive from "../../utils/create-primitive";
 const name = "line";
 
 const variables = {
-  x: 0,
-  y: 0,
+  x: 30,
+  y: 50,
   dx: 0,
   dy: 0,
   text: "Text",

@@ -5,10 +5,10 @@ import createPrimitive from "../../utils/create-primitive";
 const name = "circle";
 
 const variables = {
-  x: 0,
-  y: 0,
-  r: 10,
-  fill: "",
+  x: 50,
+  y: 50,
+  r: 30,
+  fill: "rgba(0,0,0,.3)",
   stroke: "",
   "strokeWidth": ""
 };

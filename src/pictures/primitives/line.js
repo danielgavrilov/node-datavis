@@ -5,12 +5,12 @@ import createPrimitive from "../../utils/create-primitive";
 const name = "line";
 
 const variables = {
-  x1: 0,
-  y1: 0,
-  x2: 10,
-  y2: 15,
-  stroke: "",
-  "strokeWidth": ""
+  x1: 10,
+  y1: 10,
+  x2: 70,
+  y2: 60,
+  stroke: "rgba(0,0,0,.3)",
+  "strokeWidth": "2"
 };
 
 const order = [

@@ -5,11 +5,11 @@ import createPrimitive from "../../utils/create-primitive";
 const name = "ellipse";
 
 const variables = {
-  x: 0,
-  y: 0,
-  rx: 10,
-  ry: 15,
-  fill: "",
+  x: 40,
+  y: 40,
+  rx: 30,
+  ry: 20,
+  fill: "rgba(0,0,0,.3)",
   stroke: "",
   "strokeWidth": ""
 };

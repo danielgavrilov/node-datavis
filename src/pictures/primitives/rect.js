@@ -5,11 +5,11 @@ import createPrimitive from "../../utils/create-primitive";
 const name = "rect";
 
 const variables = {
-  x: 0,
-  y: 0,
-  height: 20,
-  width: 20,
-  fill: "",
+  x: 10,
+  y: 10,
+  height: 50,
+  width: 50,
+  fill: "rgba(0,0,0,.3)",
   stroke: "",
   "strokeWidth": ""
 };
