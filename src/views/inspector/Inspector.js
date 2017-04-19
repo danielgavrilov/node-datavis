@@ -2,7 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { List, Map } from "immutable";
 
-import { getPicture, currentPicture } from "../../utils/pictures";
+import {
+  getPicture,
+  currentPicture,
+  isPrimitive
+} from "../../utils/pictures";
+
 import {
   renameParameter,
   changeParameter,
@@ -47,8 +52,13 @@ const mapStateToProps = (state) => {
   });
   const scope = subpicture.get("scope");
   const override = subpicture.get("override");
-  let parameters = Map(variableNames.map((name) => List([name, ""])));
-  parameters = parameters.merge(override);
+  const pictureParameters = Map(variableNames.map((name) => ([name, ""])));
+  let parameters = Map();
+  if (!isPrimitive(pictureId)) {
+    parameters = parameters.merge(Map([["x", ""], ["y", ""]]));
+  }
+  parameters = parameters.merge(pictureParameters)
+                         .merge(override);
   return {
     empty: false,
     parameters,

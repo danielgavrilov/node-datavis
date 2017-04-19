@@ -12,8 +12,7 @@ import Group from "../pictures/group";
 import primitives from "../pictures/primitives";
 import evaluate from "./evaluate";
 import parameters from "./parameters";
-
-const isPrimitive = _.curry(_.has)(primitives);
+import { isPrimitive } from "../utils/pictures";
 
 export function specToSVG({ type, params, children }, key) {
   const childrenElems = children ? children.map((child, index) => {

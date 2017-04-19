@@ -1,7 +1,9 @@
-import { has } from "lodash";
+import { has, curry } from "lodash";
 
 import { InexistingPicture } from "../engine/errors";
 import primitives from "../pictures/primitives";
+
+export const isPrimitive = curry(has)(primitives);
 
 export function currentPictureId(state) {
   return state.getIn(["editor", "pictureId"])
