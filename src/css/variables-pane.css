@@ -74,18 +74,8 @@
   padding: .2em;
 }
 
-.variable-value li {
-  background-color: transparent !important;
-}
-
-.variable-value input {
+.variable-value.expression {
   font-family: "Source Code Pro";
   font-weight: 400;
   color: #3257b4;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  outline: none;
-  display: block;
-  width: 100%;
 }

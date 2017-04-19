@@ -3,7 +3,14 @@ import { ObjectInspector } from "react-inspector";
 
 import EditableText from "../common/EditableText";
 
-const Variable = ({ name, category, variable, value, onNameChange, onValueChange }) => {
+const Variable = ({
+  name,
+  category,
+  variable,
+  value,
+  onNameChange,
+  onValueChange
+}) => {
   return (
     <div className="variable-container">
       <div className="variable-name-container">
@@ -16,16 +23,30 @@ const Variable = ({ name, category, variable, value, onNameChange, onValueChange
                         onChangeEnd={(newName) => onNameChange(name, newName)} />
         }
       </div>
-      <div className="variable-value">
-        <ObjectInspector data={value} />
-      </div>
+      <VariableValue variable={variable}
+                     value={value}
+                     onChange={(expression) => onValueChange(name, expression, "EXPRESSION")} />
     </div>
   );
 };
 
-const Expression = ({ expression }) => (
-  <input type="text" defaultValue={expression} />
-)
-
+const VariableValue = ({ variable, value, onChange }) => {
+  const expression = variable.get("expression");
+  if (expression) {
+    return (
+      <EditableText className={"variable-value expression"}
+                    value={expression}
+                    noNewlines={false}
+                    noSpaces={false}
+                    onChange={onChange} />
+    )
+  } else {
+    return (
+      <div className="variable-value value">
+        <ObjectInspector data={value} />
+      </div>
+    );
+  }
+};
 
 export default Variable;

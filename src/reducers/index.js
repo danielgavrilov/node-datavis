@@ -140,6 +140,20 @@ const renameVariable = (picture, { oldName, newName }) => {
   });
 }
 
+const changeVariable = (picture, { name, value, valueType }) => {
+  console.log(name, value, valueType);
+  if (valueType === "EXPRESSION") {
+    const variable = picture.getIn(["variables", name]);
+    const __ref = variable.get("__ref");
+    picture = reducePath(
+      picture,
+      ["graph", __ref],
+      (node) => node.set("expression", value)
+    )
+  }
+  return picture;
+};
+
 const renameParameter = (subpicture, { oldName, newName }) => {
   return renameKey(subpicture, ["override", oldName], ["override", newName]);
 }
@@ -225,8 +239,16 @@ export default function(state=Map(), action) {
         renameVariable,
         action
       );
-      state = evalPicture(state, pictureId);
-      return state;
+      return evalPicture(state, pictureId);
+
+    case CHANGE_VARIABLE:
+      state = reducePath(
+        state,
+        ["pictures", pictureId],
+        changeVariable,
+        action
+      )
+      return evalPicture(state, pictureId);
 
     case RENAME_PARAMETER:
       if (action.newName === action.oldName) {
@@ -238,8 +260,7 @@ export default function(state=Map(), action) {
         renameParameter,
         action
       );
-      state = evalPicture(state, pictureId);
-      return state;
+      return evalPicture(state, pictureId);
 
     case CHANGE_PARAMETER:
       state = reducePath(
@@ -248,8 +269,7 @@ export default function(state=Map(), action) {
         changeParameter,
         action
       )
-      state = evalPicture(state, pictureId);
-      return state;
+      return evalPicture(state, pictureId);
 
     case CHANGE_SCOPE:
       state = reducePath(
@@ -258,8 +278,7 @@ export default function(state=Map(), action) {
         changeScope,
         action
       )
-      state = evalPicture(state, pictureId);
-      return state;
+      return evalPicture(state, pictureId);
 
     default:
       return state;
