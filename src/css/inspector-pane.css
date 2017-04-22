@@ -130,17 +130,18 @@
   font-size: 1.4em;
   border-bottom: 1px solid #ccc;
   background-color: #eee;
-  padding: .25em 0;
+  padding: 0;
 }
 
 .scope-label {
   flex: 1;
-  padding: .5em .75em;
+  padding: .75em;
   font-weight: bold;
+  border-right: 1px solid rgba(0,0,0,.1);
 }
 
 .scope-name {
   flex: 3;
-  padding: .5em;
+  padding: .75em .5em;
   color: steelblue;
 }
