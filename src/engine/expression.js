@@ -24,12 +24,21 @@ export function compile(jsString) {
   }
 }
 
+const reverseString = (x) => x.split("").reverse().join("")
+const reDot = /^\s*\./i;
+
 export function extractVariables(jsString) {
   jsString = removeStringTokens(jsString);
   const variables = [];
   let x;
   do {
     x = reIdentifier.exec(jsString);
+    if (x != null && x.index > 0) {
+      const reversed = reverseString(jsString.substring(0, x.index));
+      if (reDot.test(reversed)) {
+        continue;
+      }
+    }
     if (x != null && !reReserved.test(x[0])) {
       variables.push(x[0]);
     }
