@@ -124,7 +124,10 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
       if (node != null) {
         return evaluateNode(node.get("__ref"), { functions, variables, graph }, results);
       } else {
-        throw new UndefinedVariable({ name: variable });
+        // TODO implement a parser to check that this IS actually a variable
+        // and not a function parameter or similar
+        // throw new UndefinedVariable({ name: variable });
+        return;
       }
     });
     returnValue = fn(...args);
