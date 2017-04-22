@@ -7,6 +7,12 @@ import rootReducer from "./reducers";
 import App from './views/App';
 import exampleState from "./store-example";
 
+import * as d3 from "d3";
+import _ from "lodash";
+
+window.d3 = d3;
+window._ = _;
+
 import './css/normalize.css';
 import './css/general.css';
 import './css/layout.css';
