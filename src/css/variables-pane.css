@@ -1,7 +1,7 @@
 .variables-pane {
   flex: 1;
-  min-width: 25em;
-  max-width: 40em;
+  min-width: 28em;
+  max-width: 50em;
   border-right: 1px solid #bbb;
   background-color: #eee;
   display: flex;
@@ -77,6 +77,7 @@
 .variable-value.expression {
   font-family: "Source Code Pro";
   font-weight: 400;
+  font-size: 0.857em;
   color: #3257b4;
 }
 
