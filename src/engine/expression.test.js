@@ -51,8 +51,27 @@ describe("extractVariables", () => {
     expect(extractVariables("x + x")).toEqual(["x"]);
   });
 
-  it("should ignore reserved words", () => {
+  it("should exclude reserved words", () => {
     expect(extractVariables("function + class + x")).toEqual(["x"]);
   });
+
+  it("should exclude globals", () => {
+    expect(extractVariables("x + Math")).toEqual(["x"]);
+  });
+
+  it("should exclude single quote strings", () => {
+    expect(extractVariables("x + 'testing inside string '")).toEqual(["x"]);
+  });
+
+  it("should exclude double quote strings", () => {
+    expect(extractVariables("x + \"testing inside string \"")).toEqual(["x"]);
+  });
+
+  it("should exclude methods and properties", () => {
+    expect(extractVariables("x + Math.cos(Math.PI)")).toEqual(["x"]);
+    expect(extractVariables("x.method(40)")).toEqual(["x"]);
+  });
+
+
 
 });
