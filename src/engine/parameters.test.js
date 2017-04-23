@@ -1,16 +1,5 @@
 import parameters from "./parameters";
 
-// function parameters(override, variables, scopes=[]) {
-//   if (scopes.length == 0) {
-//     scopes = [{}];
-//   }
-//   return scopes.map((scope) => {
-//     return _.mapValues(override, (expression) => {
-//       return evaluate(expression, scope, variables);
-//     })
-//   });
-// }
-
 it("should evaluate simple overriding variables", () => {
 
     const override = {
