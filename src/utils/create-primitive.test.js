@@ -21,6 +21,36 @@ it("should just work", () => {
 
   const picture = createPrimitive({ variables, draw }).picture;
 
-  expect(evaluate(picture)).toBe(0);
+  expect(evaluate(picture)).toEqual({
+    "graph": {
+      "fill": {
+        "done": true,
+        "value": "bleh"
+      },
+      "height": {
+        "done": true,
+        "value": 20
+      },
+      "width": {
+        "done": true,
+        "value": 20
+      },
+      "x": {
+        "done": true,
+        "value": 0
+      },
+      "y": {
+        "done": true,
+        "value": 0
+      }
+    },
+    "variables": {
+      "fill": "bleh",
+      "height": 20,
+      "width": 20,
+      "x": 0,
+      "y": 0
+    }
+  });
 
 });
