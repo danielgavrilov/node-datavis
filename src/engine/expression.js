@@ -26,6 +26,11 @@ export function compile(jsString) {
 
 const reverseString = (x) => x.split("").reverse().join("")
 const reDot = /^\s*\./i;
+const globals = [
+  "Math",
+  "d3",
+  "_"
+];
 
 export function extractVariables(jsString) {
   jsString = removeStringTokens(jsString);
@@ -39,7 +44,7 @@ export function extractVariables(jsString) {
         continue;
       }
     }
-    if (x != null && !reReserved.test(x[0])) {
+    if (x != null && !reReserved.test(x[0]) && !globals.includes(x[0])) {
       variables.push(x[0]);
     }
   } while (x != null);
