@@ -29,18 +29,23 @@ it("should draw a primitive in a picture", () => {
   const result = buildPictureSpec(subpictures, "test", variables);
 
   expect(result.children).toContainEqual({
-    "type": "group",
-    "subpicture": "a",
-    "params": {},
     "children": [{
-      "type": "rect",
       "params": {
+        "fill": "rgba(0,0,0,.3)",
         "height": 50,
+        "stroke": "",
+        "strokeWidth": "",
         "width": 50,
         "x": 0,
         "y": 0
       },
+      "picture": "rect",
+      "type": "rect"
     }],
+    "params": {},
+    "picture": "rect",
+    "subpicture": "a",
+    "type": "group"
   });
 
 });
