@@ -10,12 +10,6 @@ import {
 export default stateFromJS({
   "editor": {
     "pictureId": "i22pinj1uydvjk",
-    "computationPane": {
-      "selected": {
-        "type": null,
-        "item": null
-      }
-    },
     "picturesPane": {
       "picturesOrder": ["i22pinj1uydvjk"]
     },
@@ -27,16 +21,40 @@ export default stateFromJS({
     "i22pinj1uydvjk": {
       "name": "picture",
       "graph": {
+        "uarxrqj221lx5q": {
+          "type": "VARIABLE",
+          "name": "graph_height",
+          "expression": "height - 25",
+          "visible": false
+        },
+        "hdlbnxj1uyexqx": {
+          "type": "VARIABLE",
+          "name": "bar_width",
+          "expression": "width / letters.length",
+          "visible": false
+        },
+        "var_group": {
+          "type": "SOURCE",
+          "name": "group",
+          "__value": [],
+          "visible": false
+        },
+        "9qnoipj1uyfryj": {
+          "type": "VARIABLE",
+          "name": "scale",
+          "expression": "d => graph_height * (1 - d / max_freq)",
+          "visible": false
+        },
         "var_width": {
           "type": "VARIABLE",
           "name": "width",
           "expression": "800",
           "visible": false
         },
-        "var_height": {
+        "czv4bqj2219j0b": {
           "type": "VARIABLE",
-          "name": "height",
-          "expression": "400",
+          "name": "under",
+          "expression": "freq => scale(freq) > (graph_height - 20)",
           "visible": false
         },
         "var_letters": {
@@ -123,28 +141,16 @@ export default stateFromJS({
           }],
           "visible": false
         },
-        "var_group": {
-          "type": "SOURCE",
-          "name": "group",
-          "__value": [],
-          "visible": false
-        },
-        "hdlbnxj1uyexqx": {
-          "type": "VARIABLE",
-          "name": "bar_width",
-          "expression": "width / letters.length",
-          "visible": false
-        },
         "gmymthj1uyf8bm": {
           "type": "VARIABLE",
           "name": "max_freq",
           "expression": "d3.max(letters, d => d.frequency)",
           "visible": false
         },
-        "9qnoipj1uyfryj": {
+        "var_height": {
           "type": "VARIABLE",
-          "name": "scale",
-          "expression": "d3.scaleLinear().domain([0, max_freq]).range([height, 0])",
+          "name": "height",
+          "expression": "400",
           "visible": false
         }
       },
@@ -156,8 +162,57 @@ export default stateFromJS({
             "x": "bar_width * index",
             "y": "scale(frequency)",
             "width": "bar_width - 1",
-            "height": "height - scale(frequency)",
+            "height": "graph_height - scale(frequency)",
             "fill": "\"steelblue\""
+          }
+        },
+        "8vt3ocj220ynqt": {
+          "picture": "text",
+          "scope": "letters",
+          "override": {
+            "x": "bar_width * index + bar_width / 2",
+            "text-anchor": "\"middle\"",
+            "text": "(frequency * 100).toFixed(1) + \"%\"",
+            "font-weight": "",
+            "y": "scale(frequency)",
+            "dy": "under(frequency) ? \"-.4em\" : \"1.35em\"",
+            "fill": "under(frequency) ? \"black\" : \"white\"",
+            "font-size": "10"
+          }
+        },
+        "25829dj221iw55": {
+          "picture": "text",
+          "scope": null,
+          "override": {
+            "text-anchor": "\"middle\"",
+            "x": "width / 2",
+            "y": "30",
+            "text": "\"Frequency of letters in the English language\"",
+            "font-size": "14",
+            "font-weight": "\"bold\""
+          }
+        },
+        "g208ekj221prbu": {
+          "picture": "text",
+          "scope": "letters",
+          "override": {
+            "y": "graph_height + 17",
+            "x": "bar_width * index + bar_width / 2",
+            "text-anchor": "\"middle\"",
+            "text": "letter",
+            "font-weight": "\"bold\""
+          }
+        },
+        "xtpuwxj221ru71": {
+          "picture": "line",
+          "scope": null,
+          "override": {
+            "x1": "0",
+            "x2": "width",
+            "y1": "graph_height + 1",
+            "y2": "graph_height + 1",
+            "stroke": "\"black\"",
+            "strokeWidth": "1"
           }
         }
       },
@@ -168,28 +223,34 @@ export default stateFromJS({
         "height": {
           "__ref": "var_height"
         },
+        "scale": {
+          "__ref": "9qnoipj1uyfryj"
+        },
         "letters": {
           "__ref": "var_letters"
-        },
-        "group": {
-          "__ref": "var_group"
-        },
-        "bar_width": {
-          "__ref": "hdlbnxj1uyexqx"
         },
         "max_freq": {
           "__ref": "gmymthj1uyf8bm"
         },
-        "scale": {
-          "__ref": "9qnoipj1uyfryj"
+        "graph_height": {
+          "__ref": "uarxrqj221lx5q"
+        },
+        "under": {
+          "__ref": "czv4bqj2219j0b"
+        },
+        "bar_width": {
+          "__ref": "hdlbnxj1uyexqx"
+        },
+        "group": {
+          "__ref": "var_group"
         }
       },
       "variableCategories": {
         "required": ["width", "height"],
         "sources": ["letters"],
-        "custom": ["bar_width", "max_freq", "scale"]
+        "custom": ["bar_width", "max_freq", "scale", "under", "graph_height"]
       },
-      "subpicturesOrder": ["e16647j1uyhi05"],
+      "subpicturesOrder": ["8vt3ocj220ynqt", "e16647j1uyhi05", "25829dj221iw55", "g208ekj221prbu", "xtpuwxj221ru71"],
       "functions": {}
     }
   }
