@@ -41,6 +41,11 @@
   text-align: center;
   justify-content: center;
   cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.primitives-palette .primitive:hover {
+  background-color: rgba(0,0,0,.05);
 }
 
 .primitives-palette .icon {
