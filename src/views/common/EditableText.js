@@ -55,14 +55,14 @@ class EditableText extends Component {
   _refresh() {
     const el = findDOMNode(this);
     const { value } = this.props;
-    if (el.textContent !== value) {
-      el.textContent = value;
+    if (el.innerText !== value) {
+      el.innerText = value;
     }
     this._isDirty = false;
   }
 
   _getContent() {
-    return findDOMNode(this).textContent;
+    return findDOMNode(this).innerText;
   }
 
   _onInput() {
