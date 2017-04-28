@@ -2,6 +2,7 @@
   "name": "node-datavis",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://gavrilov.co.uk/node-datavis",
   "devDependencies": {
     "react-scripts": "0.8.5"
   },
