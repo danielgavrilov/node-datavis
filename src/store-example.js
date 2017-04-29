@@ -30,7 +30,7 @@ export default stateFromJS({
         "hdlbnxj1uyexqx": {
           "type": "VARIABLE",
           "name": "bar_width",
-          "expression": "width / letters.length",
+          "expression": "30",
           "visible": false
         },
         "var_group": {
@@ -48,7 +48,7 @@ export default stateFromJS({
         "var_width": {
           "type": "VARIABLE",
           "name": "width",
-          "expression": "letters.length * 30",
+          "expression": "letters.length * bar_width",
           "visible": false
         },
         "czv4bqj2219j0b": {
