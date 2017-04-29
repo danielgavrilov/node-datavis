@@ -48,7 +48,7 @@ export default stateFromJS({
         "var_width": {
           "type": "VARIABLE",
           "name": "width",
-          "expression": "800",
+          "expression": "letters.length * 30",
           "visible": false
         },
         "czv4bqj2219j0b": {
