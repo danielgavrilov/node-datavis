@@ -28,7 +28,10 @@ export class InexistingPicture extends Error {
 
 export class InvalidScope extends Error {
   constructor({ name, type }) {
-    super("Variable '" + name + "' is not a valid scope variable. Expected an array, but got: " + type);
+    super(
+      "Variable '" + name + "' is not a valid scope variable. " +
+      "Expected an array, but got: " + type
+    );
     this.name = name;
     this.type = type;
   }
@@ -36,7 +39,10 @@ export class InvalidScope extends Error {
 
 export class MismatchingArguments extends Error {
   constructor({ name, expected, got }) {
-    super("Mismatching number of arguments for function '" + name + "' expected: " + expected + ", got: " + got);
+    super(
+      "Mismatching number of arguments for function '" + name +
+      "' expected: " + expected + ", got: " + got
+    );
     this.name = name;
     this.expected = expected;
     this.got = got;

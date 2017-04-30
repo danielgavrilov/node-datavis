@@ -104,7 +104,10 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
     const fn = def.get("fn");
 
     if (fn == null) {
-      throw new Error("Function definition '" + definition + "' does not have a function body.")
+      throw new Error(
+        "Function definition '" + definition +
+        "' does not have a function body."
+      )
     }
 
     const args = item.get("in")
@@ -133,7 +136,10 @@ function evaluateNode(nodeId, { functions, variables, graph }, results={}) {
     returnValue = fn(...args);
 
   } else {
-    throw new Error("evaluateNode couldn't recognise passed item. This shouldn't happen. IT'S ALL HOPELESS.");
+    throw new Error(
+      "evaluateNode couldn't recognise passed item. This shouldn't happen. " +
+      "IT'S ALL HOPELESS."
+    );
   }
 
   result.done = true;
